@@ -1,0 +1,8 @@
+include ../../../../common/header
+
+div.weui-panel.weui-panel_access
+    div.weui-panel__bd
+        a(ng-repeat='key in listItems track by $index',href='#/serviceAction/list/{{key.name}}')
+            div.weui-media-box.weui-media-box_text
+                h4.weui-media-box__title(ng-bind='key.name')
+                p.weui-media-box__desc(ng-bind='key.remark')

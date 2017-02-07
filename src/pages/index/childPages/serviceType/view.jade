@@ -1,0 +1,30 @@
+include ../../../../common/header
+
+div.weui-cells
+    div.weui-cell
+        div.weui-cell__bd
+            p 服务名称
+        div.weui-cell__ft
+            | #{serviceType.name}
+    div.weui-cell
+        div.weui-cell__bd
+            p 服务字段
+        div.weui-cell__ft
+            | #{serviceType.actions}
+    div.weui-cell
+        div.weui-cell__bd
+            p 服务说明
+        div.weui-cell__ft
+            | #{serviceType.remark}
+    div.weui-cell
+        div.weui-cell__bd
+            p 录入者
+        div.weui-cell__ft
+            | #{serviceType.uid}
+    div.weui-cell
+        div.weui-cell__bd
+            p 录入时间
+        div.weui-cell__ft
+            | #{serviceType.ts}
+a.weui-btn.weui-btn_primary.myaw(href="javascript:void(0)",style="margin-top:15px;",ng-click="serviceTypeUpdate('"+serviceType.id+"')") 修改服务
+a.weui-btn.weui-btn_warn.myaw(href="javascript:void(0)",style="margin-top:15px;",ng-click="serviceTypeDelete('"+serviceType.id+"')") 删除服务

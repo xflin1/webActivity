@@ -1,0 +1,27 @@
+include ../../../common/nav_config
+include ../../../common/mixin
+header.bar.bar-nav
+    i.icon.fa.fa-angle-left.pull-left
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    +nav(nav)
+    h1.title 首页
+div.weui-panel.weui-panel_access
+    div.weui-panel__hd 热门活动
+    div.weui-panel__bd
+        a.weui-media-box.weui-media-box_appmsg(href='javascript:void(0);')
+            div.weui-media__hd
+                img.weui-media__thumb(src='',alt='')
+            div.weui-media__bd
+                h4.weui-media__title 标题一
+                p.weui-media__desc 由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
+        a.weui-media-box.weui-media-box_appmsg(href='javascript:void(0);')
+            div.weui-media__hd
+                img.weui-media__thumb(src='',alt='')
+            div.weui-media__bd
+                h4.weui-media__title 标题一
+                p.weui-media__desc 由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
+    div.weui-panel__ft
+        a.weui-cell.weui-cell_access.weui-cell_link(href='javascript:void(0);')
+            div.weui-cell__bd 查看更多
+            span.weui-cell__ft

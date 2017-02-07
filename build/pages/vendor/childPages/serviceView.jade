@@ -1,0 +1,26 @@
+include ../../../common/header
+
+div.weui-cells(style="margin-top:2.2rem")
+    div.weui-cell
+        div.weui-cell__bd
+            p 标题
+        div.weui-cell__ft
+            |{{service.name}}
+    div.weui-cell
+        div.weui-cell__bd
+            p 描述
+        div.weui-cell__ft
+            | {{service.description}}
+    div.weui-cell
+        div.weui-cell__bd
+            p 内容
+        div.weui-cell__ft
+            | {{service.content}}
+    div.weui-cell
+        div.weui-cell__bd
+            p 人数上限
+        div.weui-cell__ft
+            | {{service.limitedNum}}
+
+a.weui-btn.weui-btn_primary.myaw(href="javascript:void(0)",style="margin-top:15px;",ng-click="serviceUpdate(service.id)") 修改服务
+a.weui-btn.weui-btn_warn.myaw(href="javascript:void(0)",style="margin-top:15px;",ng-click="serviceDelete(service.id)") 删除服务

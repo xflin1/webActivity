@@ -1,0 +1,15 @@
+{
+  "getMulti":"select ?? from ?? where ",
+  "getAllMulti":"select * from ?? where ",
+  "update":"update ?? set ? where ",
+  "delete":"delete from ?? where ",
+  "getGroupByUid":"select ?? from `group` where id = (select gid from `usergroup` where uid = ?)",
+  "getUserByGid":"select ?? from `user` where id = (select uid from `usergroup` where gid = ?)",
+  "getVendorByUid":"select ?? from `vendor` where id = (select vid from `uservendor` where uid = ?)",
+  "getMangeByUid":"select ?? from `vendor` where id in (select vid from `uservendor` where uid = ?&&role='ROLE_USER')",
+  "getUserByVid":"select ?? from `user` where id = (select uid from `uservendor` where vid = ?)",
+  "getByTs":"select ?? from ?? where _ts >= ?&&_to=?",
+  "findSignedByUid": "SELECT ?? FROM `serviceData` WHERE id IN(SELECT sd FROM `serviceResult` WHERE uid=? ) ORDER BY `ts` DESC  LIMIT ?,? ",
+  "findAllSignedByUid": "SELECT * FROM `serviceData` WHERE id IN(SELECT sd FROM `serviceResult` WHERE uid=? && status=-1 ) ORDER BY `ts` DESC LIMIT ?,? "
+}
+

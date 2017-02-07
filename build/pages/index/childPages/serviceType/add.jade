@@ -1,0 +1,37 @@
+include ../../../../common/header
+form(name='form',style="margin-top:2.97rem;",novalidate="novalidate")
+
+    div.weui-cells.weui-cells_form
+        div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.name.$error.existUserName||form.name.$error.required]")
+            div.weui-cell__hd
+                label.weui-label 名称
+            div.weui-cell__bd
+                input.weui-input(
+                            name='name',
+                            ng-model='service.name',
+                            ng-model-options="{ updateOn: 'blur' }",
+                            placeholder="服务名称,必须填写",
+                            required)
+            div.weui-cell__ft(ng-show='form.name.$error.existUserName||form.name.$error.required')
+                i.weui-icon-warn
+    div.weui-cells__title 字段选择
+    div.weui-cells.weui-cells_checkbox
+        label.weui-cell.weui-check__label.mylabel(ng-repeat='key in listItems')
+            div.weui-cell__hd
+                input.weui-check(type="checkbox",ng-model='service[key.name]',name='key.name')
+                i.weui-icon-checked
+            div.weui-cell__bd
+                p.myp(ng-bind='key.name')
+
+    div.weui-cells__title 描述
+    div.weui-cells.weui-cells_form
+        .weui-cell
+            .weui-cell__bd
+                textarea.weui-textarea(
+                name='remark',
+                ng-model='service.remark',
+                placeholder="服务描述",
+                rows=3)
+    div.weui-btn-area
+        a.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="form.$invalid",ng-click='typeAdd(service,actions)') 确定
+

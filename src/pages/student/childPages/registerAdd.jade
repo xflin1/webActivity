@@ -1,0 +1,14 @@
+form(name='form' ng-controller='registerAdd')
+    div.weui-cells__title 人数限制
+    div.weui-cells.weui-cells_form
+        .weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.description.$error.required]")
+            .weui-cell__bd
+                textarea.weui-textarea(
+                name='description',
+                ng-model='Register.limit',
+                placeholder="人数限制",
+                required,
+                rows=3)
+    div.weui-btn-area
+        button.weui-btn.weui-btn_primary.ui-btn(ng-disabled="form.$invalid",ng-click='next()') 下一步
+

@@ -1,0 +1,9 @@
+extends ../../common/layout
+block title
+    |webSocketDemo
+block body
+    div(ng-controller='wsDemo')
+        h1.text-center  ws测试
+        div(ui-toast='toastService.message',type='toastService.type')
+        button.weui-btn.weui-btn_primary(ng-click='sendMsg()') 发送chat测试
+    div(ng-controller='test')

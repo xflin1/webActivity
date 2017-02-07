@@ -1,0 +1,51 @@
+include ../../../common/header
+form(name='form',style="margin-top:2.97rem;",novalidate="novalidate")
+
+    div.weui-cells.weui-cells_form
+        div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.name.$error.required]")
+            div.weui-cell__hd
+                label.weui-label 标题
+            div.weui-cell__bd
+                input.weui-input(
+                            name='name',
+                            ng-model='service.name',
+                            ng-model-options="{ updateOn: 'blur' }",
+                            placeholder="服务标题,必须填写",
+                            required)
+            div.weui-cell__ft(ng-show='form.name.$error.required')
+                i.weui-icon-warn
+
+    div.weui-cells.weui-cells_form
+        div.weui-cell(ng-class="")
+            div.weui-cell__hd
+                label.weui-label 缩略图
+            div.weui-cell__bd
+                img.img-thumbnail(src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTQweDE0MDwvdGV4dD48L2c+PC9zdmc+')
+
+    div.weui-cells__title 描述
+    div.weui-cells.weui-cells_form
+        .weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.description.$error.required]")
+            .weui-cell__bd
+                textarea.weui-textarea(
+                name='description',
+                ng-model='service.description',
+                placeholder="服务描述",
+                required,
+                rows=3)
+
+    div.weui-cells__title 内容
+    div.weui-cells.weui-cells_form
+        .weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.content.$error.required]")
+            .weui-cell__bd
+                textarea.weui-textarea(
+                name='content',
+                ng-model='service.content',
+                placeholder="服务内容",
+                required,
+                rows=8)
+
+    div#actions
+
+    div.weui-btn-area
+        a.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="form.$invalid",ng-click='serviceAdd(service)') 确定
+

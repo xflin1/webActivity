@@ -1,0 +1,11 @@
+.mybtn[disabled]:hover{
+    color:#fff;
+}
+.myaw:hover{
+    cursor: pointer;
+    color:#fff;
+}
+.myab:hover{
+    cursor: pointer;
+    color:#000;
+}

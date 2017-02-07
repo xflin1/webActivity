@@ -1,0 +1,15 @@
+//--------功能导航解析
+if menu
+    mixin nav(nav)
+        ul.dropdown-menu.dropdown-menu-right(aria-labelledby="dLabel")
+            each val,index in nav
+                if index == menu
+                    each v,k in val
+                        li
+                            a(href=v.url)
+                                i.fa.pull-left.fa-lg(class='fa-'+v.icon)
+                                | #{v.name}
+                        //-获取当前菜单名称
+                        if currMenu
+                            if k == currMenu
+                                input#currMenuName.hidden(type="text",ng-model="currMenuName",value="#{v.name}")

@@ -1,0 +1,6 @@
+.ui-toast {
+    background: rgba(0, 0, 0, 0.42);
+}
+.ui-toast .weui-icon-warn {
+    font-size: 40px;
+}

@@ -1,0 +1,33 @@
+body{
+    background-color: #f8f8f8;
+}
+label{
+    font-weight:normal;
+    color:#000;
+}
+a:hover{
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+h3{
+    line-height: 50px;
+}
+
+.ui-input {
+    border: solid #FFFFFF 1px;
+    border-radius: 4px;
+}
+.ui-input:focus{
+    border: solid rgb(162, 220, 228) 1px;
+    border-radius: 4px;
+}
+.ui-input.ng-invalid.ng-touched{
+    border: solid rgb(221, 228, 58) 1px;
+    border-radius: 4px;
+}
+.ui-btn[disabled]{
+    background-color: #9ED99D;
+}
+
+

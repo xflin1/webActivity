@@ -1,0 +1,115 @@
+html{
+    font-size: 20px !important;
+}
+a:hover{
+    text-decoration: none;
+}
+.bar {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 2.2rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    background-color: #69B850;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.bar:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: auto;
+    top: auto;
+    height: 1px;
+    width: 100%;
+    background-color: #e7e7e7;
+    display: block;
+    z-index: 15;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .bar:after {
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+    }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+    .bar:after {
+        -webkit-transform: scaleY(0.33);
+        transform: scaleY(0.33);
+    }
+}
+.bar-nav {
+    top: 0;
+}
+.title {
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 -0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 2.2rem;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+}
+.title a {
+    color: inherit;
+}
+.bar .icon {
+    position: relative;
+    z-index: 20;
+    padding: .5rem .1rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
+}
+.dropdown-menu i{
+    font-weight: normal;
+    padding: 0px;
+    font-size: inherit;
+    line-height: inherit;
+}
+.icon {
+    font-style: normal;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 100% auto;
+    background-position: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.weui-label{
+    font-weight:normal;
+}
+.fa{
+    width: 20px;
+    text-align: right;
+}
+.bar-nav i{
+    cursor: pointer;
+}
+.inline-block{
+    display:inline-block;
+}
+.wa-center{
+    text-align:center;
+}
+.weui-cells:before{
+    border-top:0px;
+}
+.weui-cell:before{
+    border-top:0px;
+}
+.wa-log{
+    color:#70C846;
+    margin-top:2.97rem;
+    text-align:right;
+    padding-right:3rem;
+}

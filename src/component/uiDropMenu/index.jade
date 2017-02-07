@@ -1,0 +1,5 @@
+ul.dropdown-menu.dropdown-menu-right.ui-drop-menu(aria-labelledby="dLabel")
+    li(ng-repeat='(k,v) in menu ')
+        a(ng-href='{{v.url}}' ui-a)
+            i.fa.pull-left.fa-lg(class='fa-{{v.icon}}')
+            | {{v.name}}

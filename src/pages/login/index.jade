@@ -1,0 +1,31 @@
+extends ../../common/layout
+block title
+    |登录
+block body
+    div(ng-controller='login')
+        h3.text-center
+            |使用帐号和密码登录
+        form.weui-cells.weui-cells_form(name='form')
+            .weui-cell
+                .weui-cell__hd
+                    label.weui-label 帐号
+                .weui-cell__bd
+                   input#name.weui-input.ui-input(
+                        name='name',
+                        placeholder="请输入帐号",
+                        required)
+            .weui-cell
+                .weui-cell__hd
+                    label.weui-label 密码
+                .weui-cell__bd
+                    input.weui-input.ui-input(
+                        name='password',
+                        ng-model='user.pass',
+                        type="password",
+                        placeholder="密码",
+                        required)
+        .weui-btn-area
+            button.weui-btn.weui-btn_primary.ui-btn(
+                ng-disabled='form.$invalid',
+                ng-click='login(user)') 确定
+        div(ui-toast='toastService.message',type='toastService.type')

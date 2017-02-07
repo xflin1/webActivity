@@ -1,0 +1,19 @@
+div(ui-content-for='navBar')
+    i.icon.fa.fa-angle-left.pull-left(ng-click='back()')
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    div(ui-drop-menu='menus')
+    h1.title {{vendorInfo.name}}
+div
+    div.weui-panel__hd  选择操作
+    div.weui-panel__bd
+        a.weui-cell.weui-cell_access(ng-href='#/loader/add/{{vendorInfo.id}}')
+            .weui-cell__hd
+                i.fa.fa-edit
+            .weui-cell__bd.weui-cell_primary 添加新服务
+            .weui-cell__ft
+        a.weui-cell.weui-cell_access(ng-href='#/manage/list/{{vendorInfo.id}}')
+            .weui-cell__hd
+                i.fa.fa-list-ul
+            .weui-cell__bd.weui-cell_primary 已添加服务
+            .weui-cell__ft

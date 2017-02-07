@@ -1,0 +1,92 @@
+header.bar.bar-nav
+    h1.title#nav-title 注册帐号
+div.right.wa-log
+    a(href='../') 已有帐号登录
+        span.glyphicon.glyphicon-log-in(style='color:#69B850')
+div(ng-controller="register")
+    div.weui-cells.weui-cells_checkbox.wa-center(style='margin-top:0;')
+        label.weui-cell.inline-block.weui-check_label(for='userPerson')
+            label.weui-cell_hd
+                input.weui-check(
+                id='userPerson',
+                ng-value='false',
+                ng-model='radioValue',
+                type='radio',
+                ng-init='radioValue=false;')
+                i.weui-icon-checked
+            label.weui-cell-bd
+                p 个人
+        label.weui-cell.inline-block.weui-check_label(for='userVendor')
+            label.weui-cell_hd
+                input.weui-check(
+                id='userVendor',
+                ng-model='radioValue',
+                ng-value='true',
+                type='radio')
+                i.weui-icon-checked
+            label.weui-cell-bd
+                p 企业
+    form(name='form',style="margin-top:-1.17647em;",novalidate="novalidate")
+        div
+            div.weui-cells.weui-cells_form(ng-show="radioValue")
+                div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.name.$error.required]")
+                    div.weui-cell__hd
+                        label.weui-label 企业名称
+                    div.weui-cell__bd
+                        input.weui-input(
+                        name='name',
+                        ng-model='vendor.name',
+                        ng-model-options="{ updateOn: 'blur' }",
+                        placeholder="企业名称,必须填写",
+                        required)
+                    div.weui-cell__ft(ng-show='form.name.$error.required')
+                        i.weui-icon-warn
+            div.weui-cells.weui-cells_form
+                div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.userName.$error.required||form.userName.$error.existUserName]")
+                    div.weui-cell__hd
+                        label.weui-label 用户名
+                    div.weui-cell__bd
+                        input.weui-input(
+                        name='userName',
+                        ng-model='vendor.userName',
+                        placeholder="请输入帐号",
+                        ng-model-options="{ updateOn: 'blur' }",
+                        exist-user-name,
+                        required)
+                    div.weui-cell__ft(ng-show='form.userName.$error.required')
+                        i.weui-icon-warn
+
+            div.weui-cells.weui-cells_form
+                div.weui-cell(ng-class="{'weui-cell_warn':vendor.userPassword != vendor.userPasswordConfirm}")
+                    div.weui-cell__hd
+                        label.weui-label 密码
+                    div.weui-cell__bd
+                        input.weui-input(
+                        name='userPassword',
+                        ng-model='vendor.userPassword',
+                        type="password",
+                        placeholder="密码",
+                        required)
+            div.weui-cells.weui-cells_form
+                div.weui-cell(ng-class="{'weui-cell_warn':(vendor.userPassword != vendor.userPasswordConfirm) && form.userPasswordConfirm.$dirty}")
+                    div.weui-cell__hd
+                        label.weui-label 确认密码
+                    div.weui-cell__bd
+                        input.weui-input(
+                        name='userPasswordConfirm',
+                        ng-model='vendor.userPasswordConfirm',
+                        type="password",
+                        placeholder="确认密码",
+                        required)
+            div.weui-cells.weui-cells_form
+                label.weui-cell
+                    label.weui-cell_hd
+                        input.weui-input(
+                        style="margin-top:-10px;",
+                        ng-model='vendor.agreeOrNot',
+                        type='checkbox')
+                        i.weui-icon-checked
+                    label.weui-cell-bd
+                        p(style='font-size:12px;') 我已阅读并同意《创新平台使用协议》
+            div.weui-btn-area
+                button.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="!(vendor.agreeOrNot) ||!vendor.userPassword||(vendor.userPassword != vendor.userPasswordConfirm)||(radioValue && !(vendor.name))",ng-click='registerSubmit(vendor)') 确定

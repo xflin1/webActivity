@@ -1,0 +1,22 @@
+.mybtn[disabled]:hover{
+    color:#fff;
+}
+.myaw:hover{
+    cursor: pointer;
+    color:#fff;
+}
+.myab:hover{
+    cursor: pointer;
+    color:#000;
+}
+.mylabel{
+    margin-bottom:0px;
+    font-weight: normal;
+}
+.myp{
+    margin:0px;
+}
+.weui-cell__bd input[disabled]{
+    cursor: not-allowed;
+    opacity: 1;
+}

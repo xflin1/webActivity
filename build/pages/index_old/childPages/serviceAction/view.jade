@@ -1,0 +1,23 @@
+include ../../../../common/header
+
+div.weui-cells
+    div.weui-cell
+        div.weui-cell__bd
+            p 字段名称
+        div.weui-cell__ft
+            | #{action.name}
+    div.weui-cell
+        div.weui-cell__bd
+            p 字段说明
+        div.weui-cell__ft
+            | #{action.remark}
+    div.weui-cell
+        div.weui-cell__bd
+            p 录入者
+        div.weui-cell__ft
+            | #{action.uid}
+    div.weui-cell
+        div.weui-cell__bd
+            p 录入时间
+        div.weui-cell__ft
+            | #{action.ts}

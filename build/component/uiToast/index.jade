@@ -1,0 +1,6 @@
+.weui-mask_transparent.ui-toast(ng-show='message')
+    .weui-toast
+        i.weui-icon_toast.weui-icon-success-no-circle(ng-show='type==0')
+        i.weui-icon_toast.weui-loading(ng-show='type==1')
+        i.weui-icon_toast.weui-icon-warn(ng-show='type==2')
+        p.weui-toast_content {{message}}

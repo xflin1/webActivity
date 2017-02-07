@@ -1,0 +1,15 @@
+include ../../../common/vendor_header
+div.weui-panel.weui-panel_access
+    div.weui-panel__hd 热门活动
+    div.weui-panel__bd
+        a.weui-media-box.weui-media-box_appmsg(ng-repeat='key in listItems', href='#/vendor/serviceView/{{key.id}}')
+            div.weui-media-box__hd
+                img.weui-media-box__thumb.img-rounded(src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTQweDE0MDwvdGV4dD48L2c+PC9zdmc+',alt='')
+            div.weui-media-box__bd
+                h4.weui-media-box__title {{key.name}}
+                p.weui-media-box__desc {{key.description}}
+
+    div.weui-panel__ft
+        a.weui-cell.weui-cell_access.weui-cell_link(href='javascript:void(0);')
+            div.weui-cell__bd 查看更多
+            span.weui-cell__ft

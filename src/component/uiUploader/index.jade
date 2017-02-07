@@ -1,0 +1,13 @@
+.weui-uploader__bd
+    ul.weui-uploader__files(style='margin:9px 9px 0 0')
+        li.weui-uploader__file(ng-repeat='k in items  track by $index'
+        ng-style='k.style')
+    .weui-uploader__input-box {{items.length}}
+        input.weui-uploader__input(
+            type='file'
+            ngf-select
+            ng-model='picFile'
+            name='file'
+            accept="image/*"
+            ngf-max-size='3MB'
+            ngf-model-invalid="errorFile")

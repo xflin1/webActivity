@@ -1,0 +1,46 @@
+.ui-list-item .weui-media__thumb{
+    width:110px;
+    margin-right: 10px;
+}
+
+.ui-panel {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    margin: 0;
+    padding-top: 2.2rem;
+}
+
+.ui-cell {
+
+}
+
+.ui-cell .fa{
+    padding-right:2px;
+}
+
+.ui-cell .weui-cell__hd{
+    color:green;
+}
+.ui-cell .weui-cell__bd{
+    padding-left: 2em;
+    color:black;
+}
+
+.ui-page {
+    padding: 15px 25px;
+}
+.ui-page .p{
+    text-indent: 2em;
+}
+.ui-page img{
+    width: 100%;
+}
+.ui-star{
+    color: #E68A33;
+}
+
+.ui-btn[disabled]{
+    background-color: #9ED99D;
+}

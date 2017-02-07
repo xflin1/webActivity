@@ -1,0 +1,13 @@
+include ../../../common/nav_config
+include ../../../common/mixin
+header.bar.bar-nav
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    +nav(nav)
+    h1.title 管理员用户
+div.weui-panel.weui-panel_access
+
+    div.weui-panel__ft
+        a.weui-cell.weui-cell_access.weui-cell_link(href='javascript:void(0);')
+            div.weui-cell__bd 该页面用于显示管理员帐号状态
+            span.weui-cell__ft

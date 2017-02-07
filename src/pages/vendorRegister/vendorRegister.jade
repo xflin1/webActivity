@@ -1,0 +1,122 @@
+header.bar.bar-nav
+    h1.title#nav-title 企业用户注册
+
+form(name='form',style="margin-top:2.97rem;",novalidate="novalidate",ng-controller="vendorRegister")
+
+    div(ng-show="stepOne")
+        div.weui-cells.weui-cells_form
+            div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.name.$error.required]")
+                div.weui-cell__hd
+                    label.weui-label 企业名称
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='name',
+                    ng-model='vendor.name',
+                    ng-model-options="{ updateOn: 'blur' }",
+                    placeholder="企业名称,必须填写",
+                    required)
+                div.weui-cell__ft(ng-show='form.name.$error.required')
+                    i.weui-icon-warn
+        div.weui-cells__title 描述
+        div.weui-cells.weui-cells_form
+            .weui-cell
+                .weui-cell__bd
+                    textarea.weui-textarea(
+                    name='remark',
+                    ng-model='vendor.remark',
+                    placeholder="企业描述",
+                    rows=3)
+
+        div.weui-cells__title 服务类型
+        div.weui-cells.weui-cells_checkbox
+            label.weui-cell.weui-check__label.mylabel(ng-repeat='key in listItems')
+                div.weui-cell__ft
+                    input.weui-check(type="radio",ng-model='vendor.st',name='st',value='{{key.id}}')
+                    span.weui-icon-checked
+                div.weui-cell__bd
+                    p.myp(ng-bind='key.name')
+
+        div.weui-cells.weui-cells_form
+            div.weui-cell
+                div.weui-cell__hd
+                    label.weui-label 手机
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='mobil',
+                    ng-model='vendor.mobile',
+                    placeholder="输入您的联系手机",
+                    )
+
+        div.weui-cells.weui-cells_form
+            div.weui-cell
+                div.weui-cell__hd
+                    label.weui-label 固定电话
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='phone',
+                    ng-model='vendor.phone',
+                    placeholder="输入您的联系固话",
+                    )
+
+        div.weui-cells.weui-cells_form
+            div.weui-cell
+                div.weui-cell__hd
+                    label.weui-label 营业执照
+                div.weui-cell__bd
+                    img.img-thumbnail(src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTQweDE0MDwvdGV4dD48L2c+PC9zdmc+')
+                div.weui-cell__ft(ng-show='')
+                    i.weui-icon-warn
+
+        div.weui-cells.weui-cells_form
+            div.weui-cell
+                div.weui-cell__hd
+                    label.weui-label 地址
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='address',
+                    ng-model='vendor.address',
+                    placeholder="输入企业地址",
+                    )
+        div.weui-btn-area
+            a.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="form.name.$invalid",ng-click='stepNext()') 下一步
+    div(ng-show="stepTwo")
+        div.weui-cells.weui-cells_form
+            div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.userName.$error.required||form.userName.$error.existUserName]")
+                div.weui-cell__hd
+                    label.weui-label 管理员帐号
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='userName',
+                    ng-model='vendor.userName',
+                    placeholder="请输入帐号",
+                    ng-model-options="{ updateOn: 'blur' }",
+                    exist-user-name,
+                    required)
+                div.weui-cell__ft(ng-show='form.userName.$error.required')
+                    i.weui-icon-warn
+
+        div.weui-cells.weui-cells_form
+            div.weui-cell(ng-class="{'weui-cell_warn':vendor.userPassword != vendor.userPasswordConfirm}")
+                div.weui-cell__hd
+                    label.weui-label 密码
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='userPassword',
+                    ng-model='vendor.userPassword',
+                    type="password",
+                    placeholder="密码",
+                    required)
+        div.weui-cells.weui-cells_form
+            div.weui-cell(ng-class="{'weui-cell_warn':(vendor.userPassword != vendor.userPasswordConfirm) && form.userPasswordConfirm.$dirty}")
+                div.weui-cell__hd
+                    label.weui-label 密码确认
+                div.weui-cell__bd
+                    input.weui-input(
+                    name='userPasswordConfirm',
+                    ng-model='vendor.userPasswordConfirm',
+                    type="password",
+                    placeholder="密码确认",
+                    required)
+        div.weui-btn-area
+            a.weui-btn.weui-btn_default.btn.myab(ng-click='stepForword()') 上一步
+            a.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="form.$invalid || (vendor.userPassword != vendor.userPasswordConfirm)",ng-click='vendorRegisterSubmit(vendor)') 提交

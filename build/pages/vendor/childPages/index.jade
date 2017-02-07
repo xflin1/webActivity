@@ -1,0 +1,14 @@
+include ../../../common/vendor_config
+include ../../../common/mixin
+header.bar.bar-nav
+    //i.icon.fa.fa-angle-left.pull-left.fa-inverse
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    +nav(nav)
+    h1.title 企业用户
+div.weui-panel.weui-panel_access(style="margin-top:2.2rem;")
+
+    div.weui-panel__ft
+        a.weui-cell.weui-cell_access.weui-cell_link(href='javascript:void(0);')
+            div.weui-cell__bd 该页面用于显示企业的最新状态
+            span.weui-cell__ft

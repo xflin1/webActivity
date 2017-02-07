@@ -1,0 +1,16 @@
+div(ui-content-for='navBar')
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    div(ui-drop-menu='menus')
+    h1.title 添加管理
+div
+    div.weui-panel__hd  获得授权的组织
+    div.weui-panel__bd
+        a.weui-cell.weui-cell_access(
+        ng-repeat='item in lists track by $index'
+        href='#/manage/{{item.id}}')
+            .weui-cell__hd
+                i.fa.fa-gg
+            .weui-cell__bd.weui-cell_primary
+                h4.weui-media__title {{item.name}}
+            .weui-cell__ft

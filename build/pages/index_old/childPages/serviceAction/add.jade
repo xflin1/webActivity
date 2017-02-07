@@ -1,0 +1,29 @@
+include ../../../../common/header
+form(name='form',style="margin-top:2.97rem;",novalidate="novalidate")
+
+    div.weui-cells.weui-cells_form
+        div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.name.$error.existUserName||form.name.$error.required]")
+            div.weui-cell__hd
+                label.weui-label 名称
+            div.weui-cell__bd
+                input.weui-input(
+                            name='name',
+                            ng-model='action.name',
+                            ng-model-options="{ updateOn: 'blur' }",
+                            placeholder="字段名称,必须填写",
+                            required,
+                            exist-user-name)
+            div.weui-cell__ft(ng-show='form.name.$error.existUserName||form.name.$error.required')
+                i.weui-icon-warn
+    div.weui-cells__title 描述
+    div.weui-cells.weui-cells_form
+        .weui-cell
+            .weui-cell__bd
+                textarea.weui-textarea(
+                name='remark',
+                ng-model='action.remark',
+                placeholder="字段描述",
+                rows=3)
+    div.weui-btn-area
+        button.weui-btn.weui-btn_primary.btn.mybtn(ng-disabled="form.$invalid",ng-click='actionAdd(action)') 确定
+

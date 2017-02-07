@@ -1,0 +1,14 @@
+{
+      "appenders":[
+        {
+          "type":"console"
+        },
+        {
+          "type": "dateFile",
+          "filename": "./log/restapi.log",
+          "pattern": "-yyyy-MM-dd",
+          "alwaysIncludePattern": true,
+          "pollInterval": 1
+        }
+      ]
+}

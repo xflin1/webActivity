@@ -1,0 +1,41 @@
+div(ng-controller='register')
+    div(ui-content-for='navBar')
+        i.icon.fa.fa-angle-left.pull-left(ng-click='back()')
+        a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+            i.icon.fa.fa-plus-circle.fa-inverse
+        div(ui-drop-menu='menus')
+        h1.title 活动详情
+    .weui-panel__hd
+        h1.h1 {{content.name}}
+        a(href="javascript:;" class='{{registerStatus?"ui-star":""}}' ng-click='toggleSign()')
+            span.fa(class='{{registerStatus?"fa-star":"fa-star-o"}}')
+            |{{registerStatus?'-已报名':'-未报名'}}
+    .weui-panel__bd
+        .weui-media-box.weui-media-box_small-appmsg
+            .weui-cells(ng-hide='false')
+                a.weui-cell.ui-cell(href="javascript:;")
+                    .weui-cell__hd
+                        .fa.fa-clock-o
+                        | 时间:
+                    .weui-cell__bd 2016-01-01 00:00
+            .weui-cells(ng-hide='true')
+                a.weui-cell.ui-cell(href="javascript:;")
+                    .weui-cell__hd
+                        .fa.fa-map-marker
+                        | 地点:
+                    .weui-cell__bd 广州 天河区
+            .weui-cells
+                a.weui-cell.ui-cell(href="javascript:;")
+                    .weui-cell__hd
+                        .fa.fa-map-marker
+                        | 详情:
+            .ui-page.page__bd
+                article
+                    section
+                        p
+                            img(src='http://photo.enterdesk.com/2010-10-24/enterdesk.com-3B11711A460036C51C19F87E7064FE9D.jpg')
+                        p.p {{content.content}}
+                a.weui-btn.weui-btn_primary(href='javascript:;' ng-click='sign()' ng-hide='registerStatus') 报名
+                a.weui-btn.weui-btn_warn(href='javascript:;' ng-click='unSign()' ng-show='registerStatus') 取消报名
+
+
