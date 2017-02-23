@@ -21,6 +21,9 @@ var serverInit = function(app,sessionParser,sessionStore){
     app.set('port',config.http.port);
     var httpServer = require('./httpServer.js')(app);
     var wsServer = require('./wsServer.js')(httpServer,sessionParser,sessionStore);
+    app.get('/favicon.ico',function(req,res){
+       res.json(true);
+    });
    /* var httpServer = http.createServer(app);
     httpServer.listen(config.http.port);
     httpServer.on('error',function(error){

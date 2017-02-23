@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<base href="./views"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创新之家</title>
+
+    <!-- 包含了所有编译插件，bootstrap的CSS样式 -->
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--<script src="./angular/angular.js"></script>-->
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="./angular/angular-route.js"></script>
+    <script src="./angular/mobile-angular-ui.js"></script>
+    <!--引入jQuery-->
+    <script src="./javascript/jquery-3.1.1.min.js"></script>
+    <script src="./javascript/jquery.validate.min.js"></script>
+    <script src="./javascript/spark-md5.min.js"></script>
+
+
+    <link rel="stylesheet" href="./CSS/index2.css">
+
+    <script src="./javascript/index.js"></script>
+
+</head>
+<body ng-app="myApp" ng-controller="MainController">
+    <div class="navbar navbar-default">
+        <!--style="background-image: url('./images/img/u239.png');background-size: 100% 100%"-->
+        <ul class="nav nav-pills"  style="background-color: #61B651;">
+            <div class="col-md-4 col-md-offset-2">
+                <label class="navbar-brand"><font color="white">信息</font></label>
+                <form class="navbar-form col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon dropdown">
+                                <label class="hand dropdown-toggle" id="dropdownMenu1"
+                                       style="position:relative;top:3px;"
+                                        data-toggle="dropdown">
+                                    信息
+                                    <span class="caret"></span>
+                                </label>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li  >
+                                        <a  tabindex="-1" href="./#/myActivity">我的信息</a>
+                                    </li>
+                                    <li >
+                                        <a  tabindex="-1" href="./#/publishActivity">发布信息</a>
+                                    </li>
+                                    <li  >
+                                        <a  tabindex="-1" href="./#/login">登录</a>
+                                    </li>
+                                    <!--<li role="presentation" class="divider"></li>-->
+                                    <li >
+                                        <a  tabindex="-1" href="./#/account">账户设置</a>
+                                    </li>
+                                </ul>
+                        </div>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="搜索您想要的活动">
+                    </div>
+                </form>
+            </div>
+            <li class="rightBorder leftBorder"><a id="myInfoNav" class="navbar-brand" href="./#/myActivity" ><font color="white">我的信息</font></a></li>
+            <li class="rightBorder"><a id="publishInfoNav" class="navbar-brand" href="./#/publishActivity" > <font color="white">发布信息</font></a></li>
+            <li class="page"><a id="loginNav" class="navbar-brand  " href="./#/login"  > <font color="white" >登录</font></a>
+                <label class=" " style="float:left;margin-top: 8px;">|</label><a id="registerNav"class="navbar-brand" href="./#/register"> <font color="white">注册</font></a></li>
+            <!--<li role="presentation" class="rightBorder"></li>-->
+
+            <li class="rightBorder leftBorder"><a id="accountNav"class="navbar-brand" href="./#/account" > <font color="white">账户设置</font></a></li>
+
+        </ul>
+    </div>
+    <div >
+        <div ui-yield-to="title"></div>
+        <div ng-view></div>
+    </div>
+</body>
+
+</html>

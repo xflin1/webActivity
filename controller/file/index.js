@@ -143,7 +143,7 @@ module.exports = {
         uploadfile.getById(req.params.id,['path','fid'])
             .then(function(data){
                 if(data[0]){
-                    console.log(path.join(data[0].path,data[0].fid));
+                   // console.log(path.join(data[0].path,data[0].fid));
                     res.download(path.join(data[0].path,data[0].fid));
                     //res.sendFile(path.join(data[0].path,data[0].fid));
                 }
@@ -183,5 +183,22 @@ module.exports = {
         }).catch(function (err) {
             logger.error('字段名称查询错误!'+err);
         });
+    },
+    fsFile:function(req,res){
+        uploadfile.getById(req.params.fid,['id','fid','type','name','uid','ts']).then(function (data) {
+            var reply = {};
+            if(data[0]) {
+                reply.code = "0";
+                reply.msg = 'success';
+                reply.data = data;
+                res.end(JSON.stringify(reply));
+            } else {
+                reply.code = "0";
+                reply.msg = "no record!";
+                res.end(JSON.stringify(reply));
+            }
+        }).catch(function (err) {
+            logger.error('字段名称查询错误!'+err);
+        });
     }
-}
+};

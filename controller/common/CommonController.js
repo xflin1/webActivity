@@ -14,6 +14,9 @@ module.exports = {
      */
     index:function(req,res){
         if(req.session.hasOwnProperty('role')){
+            //if(req.session.name=='admin'){
+            //    res.redirect('/test');
+            //}else
             if(req.session.role=='ROLE_ADMIN'){
                 res.redirect('/index');
             }else if(req.session.role=='ROLE_USER'){
@@ -42,8 +45,17 @@ module.exports = {
     uiUploader:function(req,res){
         res.render("../component/uiUploader/index");
     },
+    uiCarousel:function(req,res){
+        res.render("../component/uiCarousel/index");
+    },
+    uiAccordion:function(req,res){
+        res.render("../component/uiAccordion/index");
+    },
     wsDemo:function(req,res){
         res.render("./wsDemo/index");
+    },
+    sregister:function(req,res){
+        res.render("./student/childPages/register");
     }
 };
 

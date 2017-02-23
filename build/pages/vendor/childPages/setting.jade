@@ -85,4 +85,5 @@ form(name='form',style="margin-top:2.97rem;",novalidate="novalidate")
                 placeholder="输入您的联系地址",
                 )
     div.weui-btn-area
-        a.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="form.$invalid",ng-click='vendorUpdate(vendor)') 确定
+        a.weui-btn.weui-btn_primary.btn.myaw(ng-disabled="form.$invalid || form.$pristine",ng-click='vendorUpdate(vendor)') 确定
+    div(ui-toast='toastService.message',type='toastService.type')

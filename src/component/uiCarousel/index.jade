@@ -1,0 +1,11 @@
+.ui-carousel
+    ul(ng-style='style')
+        li(ng-repeat='k in items.image track by $index')
+            img(ng-src='/images/{{k}}' style='width:100vw;height:57vw')
+    .ui-carousel-opt-bar
+        a.ui-carousel-count
+            span {{_page + 1}}
+            | /{{_length}}
+.weui-gallery(style='display:block' ng-show='gallery')
+    span.weui-gallery__img(ng-style="galleryStyle"
+    ng-click="hideGallery()")

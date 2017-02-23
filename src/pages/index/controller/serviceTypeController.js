@@ -46,7 +46,7 @@ module.exports = function(App){
         });
         $scope.typeAdd = function (service) {
             //参数解析-----------------------
-            $postData = {};
+           var $postData = {};
             $postData.name = service.name;
             delete service.name;
             if(service.remark){
@@ -72,10 +72,10 @@ module.exports = function(App){
             };
 
             $http(req).then(function (response) {
-                succUrl = '/serviceType/addSuccess';
+              var  succUrl = '/serviceType/addSuccess';
                 $location.path(succUrl);
             },function () {
-                failUrl = '/serviceType/addFail';
+              var  failUrl = '/serviceType/addFail';
                 $location.path(failUrl);
             });
         }

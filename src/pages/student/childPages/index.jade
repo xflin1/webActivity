@@ -2,19 +2,30 @@ div(ui-content-for='navBar')
     a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
         i.icon.fa.fa-plus-circle.fa-inverse
     div(ui-drop-menu='menus')
-    h1.title 活动
-div
-    div.weui-panel__hd  活动
+    h1.title 信息列表
+div(infinite-scroll="pageFunction()"
+    infinite-scroll-container='container'
+    infinite-scroll-disabled='scrollDisabled')
+    div.weui-panel__hd  信息列表
     div.weui-panel__bd(ng-repeat='list in lists track by $index')
-        a.weui-media-box.weui-media-box_appmsg.ui-list-item(
-            ng-repeat='item in list track by $index'
-            href='#/loader/{{item.id}}')
-            div.weui-media__hd
-                img.weui-media__thumb(src='http://img3.3lian.com/2013/c2/43/93.jpg',alt)
-            div.weui-media__bd
-                h4.weui-media__title {{item.name}}
-                p.weui-media__desc {{item.description}}
-    div.weui-panel__ft(ng-hide='listInfo.end')
-        a.weui-cell.weui-cell_access.weui-cell_link(href='javascript:void(0);' ng-click='getLists()')
-            div.weui-cell__bd 查看更多
-            span.weui-cell__ft
+        a.ui-list-items(
+        ng-repeat='item in list track by $index'
+        href='#/loader/{{item.id}}')
+            div.ui-list-items-img
+                div
+                    img(ng-src='/thumbnail/{{item.image}}' alt)
+            div.ui-list-items-content
+                div
+                    h4 {{item.name}}
+                    p {{item.description}}
+                div
+                    div
+                        .fa.fa-clock-o
+                        | &nbsp{{item.ts*1000|date:'MM-dd hh:mm'}}
+                    div(ui-user-nickname='item.uid')
+    div.weui-panel__ft
+        .weui-loadmore(ng-show='loading')
+            i.weui-loading
+            span.weui-loadmore__tips 正在加载
+        .weui-loadmore.weui-loadmore_line(ng-show='listInfo.end')
+            span.weui-loadmore__tips 暂无数据

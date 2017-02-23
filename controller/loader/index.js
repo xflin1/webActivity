@@ -16,6 +16,12 @@ module.exports = {
     addIndex:function(req,res){
         res.render('./student/childPages/add');
     },
+    adminIndex:function(req,res){
+        res.render('./student/childPages/adminLoader');
+    },
+    manageIndex:function(req,res){
+        res.render('./student/childPages/manageLoader')
+    },
     loader:function(req,res){
         var queue = [];
         queue.push(serviceResult.getByUidSd(req.session.uid,req.body.id));
@@ -275,6 +281,7 @@ module.exports = {
                 for(var i=0;i<actions.length;i++){
                     msgAttrs[actions[i]]=req.body.data[actions[i]];
                 }
+                msgAttrs['image'] = req.body.data['image'];
                 var values = {
                     st:rows[0].id,
                     name:req.body.name,

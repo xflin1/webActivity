@@ -98,3 +98,14 @@ a:hover{
 .bar-nav i{
     cursor: pointer;
 }
+
+.we-label{
+    color:#000;
+}
+.we-info{
+    color:#000;
+}
+.we-myfa{
+    font-size:1.1em;
+    padding-top:15px;
+}

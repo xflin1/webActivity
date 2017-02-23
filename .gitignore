@@ -1,0 +1,14 @@
+config/config.js
+.idea/*
+node_modules/*
+doc/*
+build/*
+log/*
+src/pages/index_old
+uploads/default/*
+uploads/private/*
+uploads/square/*
+uploads/user/*
+uploads/tmp/*
+uploads/thumbnail/*
+doc2/*

@@ -1,0 +1,9 @@
+extends ../../common/layout
+block title
+    | {{tittle}}
+block body
+    div(ng-controller='main')
+        header.bar.bar-nav(ui-yield-to='navBar')
+        ng-view.weui-panel.weui-panel_access.ui-panel
+        div(ui-toast='toastService.message',type='toastService.type')
+

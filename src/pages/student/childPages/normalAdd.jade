@@ -1,41 +1,9 @@
-form(name='form' ng-controller='normalAdd')
-    div.weui-cells__title 标题
-    div.weui-cells.weui-cells_form
-        div.weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.name.$error.required]")
-            div.weui-cell__bd
-                input.weui-input(
-                name='name',
-                ng-model='service.name',
-                ng-model-options="{ updateOn: 'blur' }",
-                placeholder="服务标题",
-                required)
-            div.weui-cell__ft(ng-show='form.name.$error.required')
-                i.weui-icon-warn
-    .weui-cells__title 缩略图
-    .weui-cells.weui-cells_form
-        .weui-cell
-            .weui-cell__bd(ui-uploader='service')
-    div.weui-cells__title 描述
-    div.weui-cells.weui-cells_form
-        .weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.description.$error.required]")
-            .weui-cell__bd
-                textarea.weui-textarea(
-                name='description',
-                ng-model='service.description',
-                placeholder="服务描述",
-                required,
-                rows=3)
-
-    div.weui-cells__title 内容
-    div.weui-cells.weui-cells_form
-        .weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.content.$error.required]")
-            .weui-cell__bd
-                textarea.weui-textarea(
-                name='content',
-                ng-model='service.content',
-                placeholder="服务内容",
-                required,
-                rows=8)
-    div.weui-btn-area
-        button.weui-btn.weui-btn_primary.ui-btn(ng-disabled="form.$invalid",ng-click='next()') 下一步
-
+div(ui-content-for='navBar')
+    i.icon.fa.fa-angle-left.pull-left(ng-click='back()')
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    div(ui-drop-menu='menus')
+    h1.title 添加
+div(ng-controller='target')
+    div(style='position:fixed;width:100%;height:100%;padding-bottom: 2.2rem;')
+        .ui-target-wrap.ui-target-show(ui-target='list' target-select='select' style='padding-bottom: 2.2rem;')

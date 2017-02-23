@@ -1,8 +1,12 @@
 extends ../../common/layout
 block title
-    | {{tittle}}
+    | 创新应用
 block body
     div(ng-controller='main')
-        header.bar.bar-nav(ui-yield-to='navBar')
-        ng-view.weui-panel.weui-panel_access.ui-panel
+        //header.bar.bar-nav(ui-yield-to='navBar')
+        //header.bar.bar-footer(ui-yield-to='navBar')
+        //header.weui-tabbar(ui-yield-to='navBar')
+        //ng-view#menus.weui-tab
+        include ../../common/foot
+        ng-view#wrapper.weui-panel.weui-panel_access.ui-panel
         div(ui-toast='toastService.message',type='toastService.type')

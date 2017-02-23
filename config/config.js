@@ -1,24 +1,26 @@
 var path = require('path');
 module.exports={
     redisConf:{
-        host:'183.62.251.18',
+        //host:'127.0.0.1',
+        host:'120.24.222.59',
         port:'6379',
-        auth_pass:'redis1234',
-        db:3
+        db:4,
+        pass:'cellcom'
     },
     mysql:{
 
         connectionLimit : 10,
         multipleStatements: true,
-        host: '183.62.251.18',
+        host: '127.0.0.1',
         user: 'root',
         password: 'cellcom',
-        database:'service',
+        database:'serviceRelease',
         port: 3306,
         limit: 10
     },
     http:{
-        port:8090
+        port:3000,
+        uploadDir: "uploads"
     },
     log:{
         "appenders":[
@@ -33,6 +35,15 @@ module.exports={
                 "pollInterval": 1
             }
         ]
+    },
+    upload:{
+        tmp:path.join(__dirname,'../uploads/tmp'),
+        save:path.join(__dirname,'../uploads/user'),
+        thumbnails:path.join(__dirname,'../uploads/thumbnail')
+    },
+    wechat:{
+        corpid : "wx3348d8d51353fb39",
+        corpsecret : "74wx3s8E6LHBYYbxS6mj_QMlzlBncTM-fej0R8YqeHK5PerhCaRYks7_6V28Q5Hw",
+        agentid:"4"
     }
-
 };

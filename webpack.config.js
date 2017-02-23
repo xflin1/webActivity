@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var Ex = require("extract-text-webpack-plugin");
+var UglifyJsPlugin = require('uglify-js-plugin');
 var path = require('path');
 var fs = require('fs');
 var root = './src/pages/';
@@ -27,11 +28,16 @@ module.exports = {
             {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=./asset/ttf/[hash].[ext]&limit=10000&mimetype=application/octet-stream'},
             {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file?name=./asset/eot/[hash].[ext]'},
             {test: /\.jade$/, loader: 'file?name=[name]/[name].[ext]'},
-            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=./asset/svg/[hash].[ext]&limit=10000&mimetype=image/svg+xml'}
+            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=./asset/svg/[hash].[ext]&limit=10000&mimetype=image/svg+xml'},
+            {test:/.(png)|(jpg)$/, loader: "url?name=./asset/png/[hash].[ext]&limit=50000"}
         ]
     },
      plugins: [
          new Ex("[name]/style.css")/*,
+         new UglifyJsPlugin({
+          compress: true, //default 'true', you can pass 'false' to disable this plugin
+          debug: true //default 'false', it will display some information in console
+          }),
          new webpack.optimize.UglifyJsPlugin({
              compress: {
                  warnings: false

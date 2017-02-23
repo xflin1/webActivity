@@ -1,0 +1,228 @@
+<div class="span3">
+
+    <div class="account-container">
+
+        <div class="account-avatar">
+            <img src="/thumbnail/{{user.photoId}}" alt="" class="thumbnail" />
+        </div> <!-- /account-avatar -->
+
+        <div class="account-details">
+
+            <span class="account-name">admin</span>
+
+            <span class="account-role">超级管理员</span>
+
+        </div> <!-- /account-details -->
+
+    </div> <!-- /account-container -->
+
+    <hr />
+
+    <ul id="main-nav" class="nav nav-tabs nav-stacked">
+
+        <li>
+            <a href="#action">
+                <i class="icon-home"></i>
+                业务管理
+            </a>
+        </li>
+
+        <li>
+            <a href="#vendor">
+                <i class="icon-pushpin"></i>
+                机构管理
+            </a>
+        </li>
+
+        <li>
+            <a href="#service">
+                <i class="icon-th-large"></i>
+                系统维护
+            </a>
+        </li>
+
+        <li  class="active">
+            <a href="javascript:void(0);">
+                <i class="icon-user"></i>
+                个人资料
+            </a>
+        </li>
+
+        <li>
+            <a href="../logout">
+                <i class="icon-lock"></i>
+                登出
+            </a>
+        </li>
+
+    </ul>
+
+    <hr />
+
+    <div class="sidebar-extra">
+        <p></p>
+    </div> <!-- .sidebar-extra -->
+
+    <br />
+
+</div> <!-- /span3 -->
+
+<div class="span9">
+
+    <h1 class="page-title">
+        <i class="icon-user"></i>
+        个人资料
+    </h1>
+
+
+    <div class="row">
+
+        <div class="span9">
+
+            <div class="widget">
+
+                <div class="widget-header">
+                    <h3>信息修改</h3>
+                </div> <!-- /widget-header -->
+
+                <div class="widget-content">
+
+
+
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#1" data-toggle="tab">基本信息</a>
+                            </li>
+                            <li><a href="#2" data-toggle="tab">密码修改</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="1">
+                                <form id="edit-profile" class="form-horizontal">
+                                <fieldset>
+                                    <!--<div class="control-group">-->
+                                        <!--<label class="control-label" for="username">用户名</label>-->
+                                        <!--<div class="controls">-->
+                                            <!--<input type="text" class="input-medium disabled" id="username" ng-value="user.name"  disabled="" />-->
+                                            <!--<p class="help-block">用户名用来登录的，不可更改</p>-->
+                                        <!--</div> &lt;!&ndash; /controls &ndash;&gt;-->
+                                    <!--</div> &lt;!&ndash; /control-group &ndash;&gt;-->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="nickname">昵称</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="nickname" ng-model="user.nickname" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="qq">QQ</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="qq" ng-model="user.qq" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="email">邮箱地址</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-large" id="email" ng-model="user.email" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="phone">手机</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="phone"  ng-model="user.phone" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" >性别</label>
+                                        <div class="controls">
+                                            <label class="radio">
+                                                <input type="radio"  value="0" ng-model="user.sex"/>
+                                                男
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio"  value="1" ng-model="user.sex"  ng-checked="user.sex" />
+                                                女
+                                            </label>
+                                        </div>
+                                    </div> <!-- /control-group -->
+
+                                    <br />
+
+
+                                    <div class="form-actions">
+                                        <button type="submit" ng-click="submit(user)" class="btn btn-primary">保存</button>
+                                        <button class="btn">取消</button>
+                                    </div> <!-- /form-actions -->
+                                </fieldset>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="2">
+                                <form id="edit-profile2" ng-submit="submit(muser);" class="form-horizontal">
+                                <fieldset>
+                                    <div class="control-group">
+                                        <label class="control-label" for="password">旧密码</label>
+                                        <div class="controls">
+                                            <input type="password" class="input-medium" id="password" ng-model="muser.password"/>
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="newPassword">新密码</label>
+                                        <div class="controls">
+                                            <input type="password" class="input-medium" id="newPassword" ng-model="muser.newPassword"/>
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="confirmPassword">确认密码</label>
+                                        <div class="controls">
+                                            <input type="password" class="input-medium" id="confirmPassword" ng-model="muser.confirmPassword"/>
+                                        </div> <!-- /controls -->
+                                    </div>
+
+                                    <br />
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">保存</button> <button class="btn">取消</button>
+                                    </div>
+                                </fieldset>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                </div> <!-- /widget-content -->
+
+            </div> <!-- /widget -->
+
+        </div> <!-- /span9 -->
+
+    </div> <!-- /row -->
+
+
+
+
+
+
+
+
+
+</div> <!-- /span9 -->

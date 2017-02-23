@@ -5,6 +5,7 @@ module.exports = function(App){
 
     App.controller('actionList', ['$scope','currMenu','$$action','$location',
         function($scope,currMenu,$$action,$location){
+            console.log(angular.element("#currMenuName").val());
             document.title = '字段列表';
             angular.element("#nav-title").text(angular.element("#currMenuName").val());
             var preUrl = "/";
@@ -178,6 +179,9 @@ module.exports = function(App){
                  */
                 getActionList:function(){
                     return _getBase(magic.URL_ACTION_LIST);
+                },
+                getSelf:function(){
+                    return _getBase(magic.URL_USER_SELF);
                 },
                 getTypeList:function () {
                     return _getBase(magic.URL_TYPE_LIST);

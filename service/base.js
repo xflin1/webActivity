@@ -176,5 +176,155 @@ module.exports = {
                     });
             });
         });
+    },
+
+    /**
+     *
+     * @param {Array} query    添加命令集合
+     * @param {Array} format    需要填写的数据
+     * @returns {bluebird}
+     */
+    baseTransaction:function(query,format){
+        return new Promise(function(resolve,reject){
+            Promise.using(getSqlConnection(),function(connection){
+                return connection.beginTransaction()
+                    .then(function(){
+                        var length = query.length;
+                        var queue = [];
+                        for(var i=0;i<length;i++){
+                           queue.push(connection.query(query[i]));
+                        }
+                        return Promise.all(queue);
+                    })
+                    .then(function(data){
+                        return connection.commit();
+                    })
+                    .then(function(){
+                        resolve();
+                    })
+                    .catch(function(error){
+                        connection.rollback();
+                        reject(error);
+                    });
+            });
+        });
+    },
+    /**
+     *
+     * @param userValues
+     * @param vendorValues
+     * @returns {bluebird|exports|module.exports}
+     */
+    vendorRegisterInsert:function(userValues,vendorValues){
+        var query = 'INSERT INTO ?? SET ?';
+        var uid;
+        var vid;
+        return new Promise(function(resolve,reject){
+            Promise.using(getSqlConnection(),function(connection){
+                return connection.beginTransaction()
+                    .then(function(){
+                        return connection.query(query,['user',userValues]);
+                    })
+                    .then(function(rows){
+                        uid = rows.insertId;
+                        return connection.query(query,['vendor',vendorValues]);
+                    })
+                    .then(function(rows){
+                        vid = rows.insertId;
+                        var userVendorValues = {
+                            vid:vid,
+                            uid:uid,
+                            role:'ROLE_ADMIN'
+                        };
+                        return connection.query(query,['uservendor',userVendorValues]);
+                    })
+                    .then(function(){
+                        return connection.commit()
+                            .then(function(){
+                                resolve([uid,vid]);
+                            })
+                    })
+                    .catch(function(error){
+                        connection.rollback();
+                        reject(error);
+                    });
+            });
+        });
+    },
+    /**
+     *
+     * @param values
+     */
+    userRegisterInsert:function(values){
+        var query = 'INSERT INTO ?? SET ?';
+        var uid;
+        var vid=0;
+        return new Promise(function(resolve,reject){
+            Promise.using(getSqlConnection(),function(connection){
+                return connection.beginTransaction()
+                    .then(function(){
+                        return connection.query(query,['user',values]);
+                    })
+                    .then(function(rows){
+                        uid = rows.insertId;
+                        var userVendorValues = {
+                            vid:vid,
+                            uid:uid,
+                            role:'ROLE_USER'
+                        };
+                        return connection.query(query,['uservendor',userVendorValues]);
+                    })
+                    .then(function(){
+                        return connection.commit()
+                            .then(function(){
+                                resolve();
+                            })
+                    })
+                    .catch(function(error){
+                        connection.rollback();
+                        reject(error);
+                    });
+            });
+        });
+    },
+    /**
+     * 审核更新
+     * @param values
+     * @param vid
+     * @returns {bluebird|exports|module.exports}
+     */
+    auditUpdate:function(values,vid){
+        var query = sqlCmd.update;
+        var vendorQuery = sqlCmd.update;
+        utils.exchangeValues(values);
+        return new Promise(function(resolve,reject){
+            Promise.using(getSqlConnection(),function(connection){
+                query = utils.addAndCondition(query,{vid:vid},connection);
+                vendorQuery = utils.addAndCondition(vendorQuery,{id:vid},connection);
+                return connection.beginTransaction()
+                    .then(function(){
+                        return connection.query(query,['vendorCheck',values]);
+                    })
+                    .then(function(){
+                        var vendorValues = {
+                            vc:-1
+                        };
+                        if(values.result=='passed'){
+                            vendorValues.vc=0;
+                        }
+                        return connection.query(vendorQuery,['vendor',vendorValues]);
+                    })
+                    .then(function(){
+                        return connection.commit()
+                            .then(function(){
+                                resolve();
+                            })
+                    })
+                    .catch(function(error){
+                        connection.rollback();
+                        reject(error);
+                    });
+            });
+        });
     }
 };

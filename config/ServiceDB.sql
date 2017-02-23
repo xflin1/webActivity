@@ -14,21 +14,22 @@ CREATE TABLE `user` (
   `pass` varchar(128) NOT NULL COMMENT 'MD5',
   `online` smallint(6) NOT NULL DEFAULT '0' COMMENT 'ws是否在线 0--不在线，其他值--在线，默认不在线',
   `sex` smallint NOT NULL default 0 COMMENT '0---男 1---女',
-  `role` varchar(32) NOT NULL DEFAULT 'ROLE_USER' COMMENT 'ROLE_ADMIN|ROLE_USER',
+  `role` varchar(32) NOT NULL DEFAULT 'ROLE_USER' COMMENT 'ROLE_ADMIN|ROLE_USER|ROLE_VENDOR',
   `weixin` varchar(64) NULL,
   `qq` varchar(32) NULL COMMENT 'QQ号码',
   `email` varchar(64) NULL COMMENT '邮箱地址',
   `phone` varchar(20) NULL COMMENT '电话号码',
-  `photoId` int(10) NULL COMMENT '照片id = uploadFile.id',
+  `photoId` varchar(64) NOT NULL default 0 COMMENT '照片id = uploadFile.fid',
   `tslogin` int(10) NULL DEFAULT 0 COMMENT '上次登录时间',
   `tslogout` int(10) NULL DEFAULT 0 COMMENT '登出时间',
+  `weStatus` int(10) NULL DEFAULT 0 COMMENT '微信绑定状态,0未绑定,1绑定',
   `extattrs` text NULL COMMENT '其他信息{"attrs":[{"name":"华工信元","value":"测试样例"},{"name":"华奥科技","value":"广州"},{"name":"msg","value":"1234567234"},...]}',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-INSERT INTO `user` VALUES (1,'admin', 'admin', 'admin1234', 0,0, 'ROLE_ADMIN', '', '', '', '', 0, 0, 0, '');
-INSERT INTO `user` VALUES (2,'cellcom', 'cellcom', 'cellcom1234',0, 0, 'ROLE_ADMIN','', '', '', '', 0, 0, 0, '');
-INSERT INTO `user` VALUES (3,'huao', 'huao', 'huao1234',0, 0, 'ROLE_ADMIN','', '', '', '', 0, 0, 0, '');
+INSERT INTO `user` VALUES (1,'admin', 'admin', 'admin1234', 0,0, 'ROLE_ADMIN', '', '', '', '', 0, 0, 0,0, '');
+INSERT INTO `user` VALUES (2,'cellcom', 'cellcom', 'cellcom1234',0, 0, 'ROLE_USER','', '', '', '', 0, 0, 0,0, '');
+INSERT INTO `user` VALUES (3,'huao', 'huao', 'huao1234',0, 0, 'ROLE_VENDOR','', '', '', '', 0, 0, 0,0, '');
 
 -- ----------------------------
 -- Table structure for `group`
@@ -59,24 +60,24 @@ INSERT INTO `group` VALUES (3,1,'huao',10000,1,2,3,1,0,0,unix_timestamp(now()),n
 -- ----------------------------
 DROP TABLE IF EXISTS `vendor`;
 CREATE TABLE `vendor` (
-  `parentId` int(10) NOT NULL DEFAULT 1,
-  `id` int(10) NOT NULL COMMENT '记录id',
+  `parentId` int(10) NOT NULL DEFAULT 0,
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `name` varchar(64) NOT NULL COMMENT '厂商/公司/快餐店名称',
-  `st` int(10) NOT NULL COMMENT '=serviceType.id',
-  `vc` int(10) NOT NULL COMMENT '审核流程工单id,若=0表明公司数据合法,否则=vendorCheck.id，表明审核工单id值',
-  `logo` int(10) NULL COMMENT 'LOGO图像 =uploadFile.id',
+  `vc` int(10) NOT NULL COMMENT '若=0表明公司数据合法,否则=vendorCheck.id，表明审核工单id值,-1表示拒绝通过',
+  `logo` varchar(64) NULL COMMENT 'LOGO图像 =uploadFile.fid',
   `mobile` varchar(24) NULL COMMENT '厂商/公司/快餐店联系手机号码',
   `phone` varchar(24) NULL COMMENT '厂商/公司/快餐店联系固定号码',
   `address` varchar(255) NULL COMMENT '厂商/公司/快餐店地址',
   `remark` varchar(255) NULL COMMENT '厂商/公司/快餐店简单说明',
   `uid` int(10) DEFAULT 0 COMMENT '厂商/公司/快餐店管理账号uid = user.id，创建者',
+  `st` int(10) DEFAULT 1 COMMENT 'serviceType.id',
   `ts` int(10) DEFAULT 0 COMMENT '录入时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-INSERT INTO `vendor` VALUES (0,1,'root', 1,0,1,'','02087111933','五山华工朱江西路综合楼二楼','广州华工信元通信技术有限公司',1,unix_timestamp(now()));
-INSERT INTO `vendor` VALUES (1,2,'华南理工大学', 1,0,1,'','02087111933','五山路','学校',1,unix_timestamp(now()));
-
+INSERT INTO `vendor` VALUES (-1,0,'所有人',0,null,null,null,null,null,1,null,unix_timestamp(now()));
+INSERT INTO `vendor` VALUES (0,1,'华南理工大学',0,null,null,null,null,null,1,null,unix_timestamp(now()));
+INSERT INTO `vendor` VALUES (0,2,'公司',0,null,null,null,null,null,1,null,unix_timestamp(now()));
+INSERT INTO `vendor` VALUES (0,3,'公司2',0,null,null,null,null,null,1,null,unix_timestamp(now()));
 -- ----------------------------
 -- Table structure for vendor`
 -- 公司信息审核流程工单记录
@@ -95,7 +96,7 @@ CREATE TABLE `vendorCheck` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `usergroup` 群组用户
+-- Table structure for `us.ergroup` 群组用户
 -- default every user in 'root' group
 -- ----------------------------
 DROP TABLE IF EXISTS `usergroup`;
@@ -118,9 +119,54 @@ CREATE TABLE `uservendor` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `vid` int(10) NOT NULL COMMENT '=vendor.id',
   `uid` int(10) NOT NULL COMMENT '=user.id',
-  `role` varchar(32) NOT NULL DEFAULT 'ROLE_USER' COMMENT 'ROLE_ADMIN|ROLE_USER vendor数据管理员|vendor用户',
+  `role` varchar(32) NOT NULL DEFAULT 'ROLE_USER' COMMENT 'ROLE_ADMIN vendor最高管理员|ROLE_VENDOR vendor授权管理员|ROLE_USER vendor用户',
+  `origin` INT(1) NOT NULL DEFAULT '0' COMMENT '表示原始单位,0表示非原始单位,1表示原始单位(第一个进入的单位)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_uservendor` (`vid`,`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `uservendor` VALUES (1,0,1,'ROLE_ADMIN',0);
+INSERT INTO `uservendor` VALUES (2,0,2,'ROLE_USER',0);
+INSERT INTO `uservendor` VALUES (3,0,3,'ROLE_USER',0);
+INSERT INTO `uservendor` VALUES (4,2,2,'ROLE_USER',0);
+INSERT INTO `uservendor` VALUES (5,3,2,'ROLE_VENDOR',0);
+
+
+-- ----------------------------
+-- Table structure for `serviceDataTarget`
+-- ----------------------------
+DROP TABLE IF EXISTS `serviceDataTarget`;
+CREATE TABLE `serviceDataTarget` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `vid` int(10) NOT NULL COMMENT '=vendor.id',
+  `sd` int(10) NOT NULL COMMENT '=serviceData.id',
+   PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_serviceDataTarget` (`vid`,`sd`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `vendorServiceType`
+-- ----------------------------
+DROP TABLE IF EXISTS `vendorServiceType`;
+CREATE TABLE `vendorServiceType` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `vid` int(10) NOT NULL COMMENT '=vendor.id',
+  `st` int(10) NOT NULL COMMENT '=serviceType.id',
+   PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_vendorServiceType` (`vid`,`st`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `vendorServiceType` VALUES (1,3,1);
+
+-- ----------------------------
+-- Table structure for `vendorTarget`
+-- ----------------------------
+DROP TABLE IF EXISTS `vendorTarget`;
+CREATE TABLE `vendorTarget` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `vid` int(10) NOT NULL COMMENT '=vendor.id',
+  `target` int(10) NOT NULL COMMENT '=vendor.id 可发布目标id',
+  `type` int(10) DEFAULT 0 COMMENT '0表示目标为该机构以及其子集合,非0表示仅该机构',
+   PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_vendorTarget` (`vid`,`target`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -135,6 +181,7 @@ CREATE TABLE `serviceAction` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `serviceAction` VALUES ('Register','申请登记',1,unix_timestamp(now()));
+INSERT INTO `serviceAction` VALUES ('AR','AR业务',1,unix_timestamp(now()));
 
 -- ----------------------------
 -- Table structure for serviceType`
@@ -143,13 +190,14 @@ DROP TABLE IF EXISTS `serviceType`;
 CREATE TABLE `serviceType` (
   `id` int(10) NOT NULL AUTO_INCREMENT  COMMENT '记录id',
   `name` varchar(48) NOT NULL COMMENT '类型名称 food|job',
-  `actions` varchar(255) NULL COMMENT '功能操作 如[register,deliver,pay,bill]表示登记/支付/账单功能 serviceAction.name',
+  `actions` varchar(255) NULL COMMENT '对应一个action',
   `remark` varchar(255) NULL COMMENT '类型说明',
   `uid` int(10) DEFAULT 0 COMMENT '录入者uid = user.id，必须管理员身份才可操作',
   `ts` int(10) DEFAULT 0 COMMENT '录入时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+INSERT INTO `serviceType` VALUES (1 , '报名贴','[Register]','报名贴',1,unix_timestamp(now()));
+INSERT INTO `serviceType` VALUES (2 , 'AR','[AR]','AR业务',1,unix_timestamp(now()));
 -- ----------------------------
 -- Table structure for serviceData`
 -- 数据录入后，需发送微信通知消息给企业号所有用户，有新业务数据通知
@@ -161,14 +209,13 @@ CREATE TABLE `serviceData` (
   `name` varchar(64) NULL COMMENT '记录显示标题',
   `description` varchar(255) DEFAULT NULL COMMENT '简介',
   `content` text NOT NULL COMMENT '内容',
-  `image` int(10) NULL COMMENT '图片 =uploadFile.id',
+  `image` varchar(64) NULL COMMENT '图片 =uploadFile.fid',
   `msgAttrs` text DEFAULT NULL COMMENT '具体信息{"attrs":[{name:'',value:''},...],limits:100}',
   `uid` int NOT NULL COMMENT '数据录入者=user.id',
   `vid` int NOT NULL DEFAULT 0 COMMENT '=vendor.id uid所属公司vendor',
   `ts` int(10) NULL DEFAULT 0 COMMENT '数据录入时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
 
 -- ----------------------------
 -- Table structure for `serviceResult`
@@ -196,8 +243,8 @@ CREATE TABLE `uploadFile` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `fid` varchar(64) NOT NULL COMMENT '文件名',
   `path` varchar(64) NULL COMMENT '存储路径',
-  `type` varchar(48) NULL COMMENT '文件类型，如image/jpeg',
-  `name` varchar(48) NULL COMMENT '文件原名，如test.jpg',
+  `type` varchar(128) NULL COMMENT '文件类型，如image/jpeg',
+  `name` varchar(256) NULL COMMENT '文件原名，如test.jpg',
   `fsize` int(10) NULL COMMENT '文件大小bytes',
   `fspace` int(10) NULL COMMENT '文件剩余大小bytes，初始值=size',
   `uid` int(10) DEFAULT 0 COMMENT '上传者id = user.id',
@@ -316,4 +363,50 @@ CALL `sp_stat_uOfflineMsg`(`uid`,`s`,`e`);
 
 END
 ;;
+DELIMITER ;
+
+-- ----------------------------
+-- query Vendor children vendor
+-- ----------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS queryChildrenVendor $$
+CREATE FUNCTION `queryChildrenVendor` (vendorId INT)
+RETURNS VARCHAR(4000)
+BEGIN
+DECLARE sTemp VARCHAR(4000);
+DECLARE sTempChd VARCHAR(4000);
+
+SET sTemp = '$';
+SET sTempChd = cast(vendorId as char);
+
+WHILE sTempChd is not NULL DO
+SET sTemp = CONCAT(sTemp,',',sTempChd);
+SELECT group_concat(id) INTO sTempChd FROM vendor where FIND_IN_SET(parentId,sTempChd)>0 && vc=0;
+END WHILE;
+return sTemp;
+END $$
+DELIMITER ;
+
+-- ----------------------------
+-- query Vendor father vendor
+-- ----------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS queryFatherVendor $$
+CREATE FUNCTION `queryFatherVendor` (vendorId VARCHAR(4000))
+RETURNS VARCHAR(4000)
+BEGIN
+DECLARE sTemp VARCHAR(4000);
+DECLARE sTempChd VARCHAR(4000);
+
+SET sTemp = '$';
+SET sTempChd = vendorId;
+
+WHILE sTempChd is not NULL DO
+SET sTemp = CONCAT(sTemp,',',sTempChd);
+SELECT group_concat(parentId) INTO sTempChd FROM vendor where FIND_IN_SET(id,sTempChd)>0 && vc=0;
+END WHILE;
+return sTemp;
+END $$
 DELIMITER ;

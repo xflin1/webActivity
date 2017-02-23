@@ -21,8 +21,6 @@ module.exports = {
     validate_userNameCheck:{
         path:"/userName/check/:userName"
     },
-
-
     common_index:{
         path:'/'
     },
@@ -32,9 +30,6 @@ module.exports = {
     common_register:{
         path:'/register'
     },
-/*    common_pcRegister:{
-        path:'/pcRegister'
-    },*/
     common_uiToast:{
         path:'/login/uiToast'
     },
@@ -44,13 +39,19 @@ module.exports = {
     common_uiUploader:{
         path:magic.COMPONENT_UPLOADER
     },
+    common_uiCarousel:{
+        path:magic.COMPONENT_CAROUSEL
+    },
+    common_uiAccordion:{
+        path:magic.COMPONENT_ACCORDION
+    },
     common_wsDemo:{
         path:'/wsDemo'
     },
     /**
      *
      * @api {post} /uFile uploadFile
-     * @apiGroup fileOperation
+     * @apiGroup File
      * @apiVersion 1.0.0
      * @apiDescription 上传文件
      *
@@ -69,14 +70,14 @@ module.exports = {
      *  msg:msg
      * }
      * */
-    file_uFile:{
+/*    file_uFile:{
         path:'/uFile',
         method:'POST'
     },
-    /**
+    /!**
      *
-     * @api {post} /uFile/safe 上传文件安全保存
-     * @apiGroup fileOperation
+     * @api {post} /uFile/safe uploadFileOnSafe
+     * @apiGroup File
      * @apiVersion 1.0.0
      * @apiDescription 上传文件安全保存
      *
@@ -94,7 +95,7 @@ module.exports = {
      *  code:-1,
      *  msg:msg
      * }
-     * */
+     * *!/
     file_extUFile:{
         path:'/uFile/:level',
         method:'POST'
@@ -102,12 +103,13 @@ module.exports = {
     file_tFile:{
         path:'/tFile'
     },
-    /**
+    /!**
      *
-     * @api {post} /sFile/id searchFileById
-     * @apiGroup fileOperation
+     * @api {get} /sFile/id searchFileById
+     * @apiGroup File
      * @apiVersion 1.0.0
      * @apiDescription 通过文件id查询文件信息
+     *
      *
      * @apiSuccess {number} code 0获取成功 -1获取失败
      * @apiSuccess {array} [list]     数据
@@ -134,14 +136,14 @@ module.exports = {
      *  code:-1,
      *  msg:msg
      * }
-     * */
+     * *!/
     file_sFile:{
         path:'/sFile/:id'
     },
-    /**
+    /!**
      *
-     * @api {post} /sFile/fid searchFileByFid
-     * @apiGroup fileOperation
+     * @api {get,post} /sFile/:fid searchFileByFid
+     * @apiGroup File
      * @apiVersion 1.0.0
      * @apiDescription 通过文件名称查询文件信息
      *
@@ -170,30 +172,30 @@ module.exports = {
      *  code:-1,
      *  msg:msg
      * }
-     * */
-   /* file_fsFile:{
+     * *!/
+   /!* file_fsFile:{
         path:'/sFile/:fid'
-    },*/
-    /**
+    },*!/
+    /!**
      *
-     * @api {get} /dFile/id downloadFileById
+     * @api {get} /dFile/:id downloadFileById
      * @apiGroup fileOperation
      * @apiVersion 1.0.0
      * @apiDescription 下载文件
-     * */
+     * *!/
     file_dFile:{
         path:'/dFile/:id'
     },
-    /**
+    /!**
      *
-     * @api {get} /dFile/fid downloadFileByFid
+     * @api {get} /dFile/:fid downloadFileByFid
      * @apiGroup fileOperation
      * @apiVersion 1.0.0
      * @apiDescription 下载文件
-     * */
+     * *!/
     file_dfFile:{
         path:'/dFile/:fid'
-    },
+    },*/
     /**
      *
      * @api {post} /login LOGIN
@@ -244,6 +246,26 @@ module.exports = {
     },
     user_registerSuccess:{
         path:'/register/success'
+    },
+    user_userInfo:{
+        path:magic.URL_USER_SELF,
+        method:'POST'
+    },
+    user_userInfoUpdate:{
+        path:magic.URL_USER_INFO
+    },
+    user_passwordUpdate:{
+        path:magic.URL_USER_PASSWORD
+    },
+    user_userInfoModify:{
+        path:magic.URL_USER_MODIFY,
+        method:'POST'
+    },
+    user_adminInfo:{
+        path:magic.URL_ADMINUSER
+    },
+    user_vendorInfo:{
+        path:magic.URL_VENDORUSER
     },
     home_index:{
         path:'/index'
@@ -872,6 +894,9 @@ module.exports = {
     student_addList:{
        path:magic.URL_STUDENT_ADD_LIST
     },
+    student_info:{
+        path:magic.URL_STUDENT_INFO
+    },
 
     /**
      * 报名帖
@@ -908,6 +933,12 @@ module.exports = {
     },
     loader_addIndex:{
         path:magic.URL_LOADER_ADD_INDEX
+    },
+    loader_adminIndex:{
+        path:magic.URL_LOADER_ADMIN
+    },
+    loader_manageIndex:{
+        path:magic.URL_LOADER_MANAGE_INDEX
     },
     /**
      *
@@ -1115,5 +1146,8 @@ module.exports = {
     loader_manageList:{
         path:magic.URL_LOADER_MANAGE,
         method:'POST'
+    },
+    common_sregister:{
+        path:'/sreg'
     }
 };

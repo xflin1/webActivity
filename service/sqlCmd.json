@@ -5,11 +5,23 @@
   "delete":"delete from ?? where ",
   "getGroupByUid":"select ?? from `group` where id = (select gid from `usergroup` where uid = ?)",
   "getUserByGid":"select ?? from `user` where id = (select uid from `usergroup` where gid = ?)",
-  "getVendorByUid":"select ?? from `vendor` where id = (select vid from `uservendor` where uid = ?)",
-  "getMangeByUid":"select ?? from `vendor` where id in (select vid from `uservendor` where uid = ?&&role='ROLE_USER')",
+  "getVendorByUid":"select ?? from `vendor` where vc=0&&id = (select vid from `uservendor` where uid = ?)",
+  "getMangeByUid":"select ?? from `vendor` where vc=0&&id in (select vid from `uservendor` where uid = ?&&role='ROLE_USER')",
   "getUserByVid":"select ?? from `user` where id = (select uid from `uservendor` where vid = ?)",
   "getByTs":"select ?? from ?? where _ts >= ?&&_to=?",
   "findSignedByUid": "SELECT ?? FROM `serviceData` WHERE id IN(SELECT sd FROM `serviceResult` WHERE uid=? ) ORDER BY `ts` DESC  LIMIT ?,? ",
-  "findAllSignedByUid": "SELECT * FROM `serviceData` WHERE id IN(SELECT sd FROM `serviceResult` WHERE uid=? && status=-1 ) ORDER BY `ts` DESC LIMIT ?,? "
+  "findAllSignedByUid": "SELECT * FROM `serviceData` WHERE id IN(SELECT sd FROM `serviceResult` WHERE uid=? && status=-1 ) ORDER BY `ts` DESC LIMIT ?,? ",
+  "getVendorChildren":"select ?? from vendor where FIND_IN_SET(id, queryChildrenVendor(?))&&vc=0",
+  "getVendorFather":"select group_concat(id) as vidG from vendor where FIND_IN_SET(id, queryFatherVendor(?))&&vc=0",
+  "getUserVendor":"SELECT  group_concat(vid) as vidG FROM `uservendor` WHERE uid = ?",
+  "getDataTarget":"SELECT ?? from `serviceData` WHERE id IN (SELECT sd FROM `serviceDataTarget` WHERE FIND_IN_SET(vid, ?))",
+  "getDataTargetBySt":"SELECT ?? from `serviceData` WHERE st=?&&id IN (SELECT sd FROM `serviceDataTarget` WHERE FIND_IN_SET(vid, ?))",
+  "getVendorList":"select ?? from `vendor` where vc=0&&id in (select vid from `uservendor` where uid = ?&&(role='ROLE_VENDOR'||role='ROLE_ADMIN'))",
+  "getVendorServiceType":"SELECT ?? FROM `serviceType` WHERE id in (select st from `vendorServiceType` where vid=?)",
+  "getDataBySd":"select ?? from `serviceData` WHERE id IN(SELECT sd FROM `serviceDataTarget` WHERE FIND_IN_SET(vid,?)&& sd = ?)",
+  "findDataByStatusSt":"SELECT ?? from `serviceData` WHERE id in(select sd FROM `serviceResult` where uid=?&&status=?)&&st=?",
+  "getAdminData":"SELECT ?? from `serviceData` where id=? && find_in_set(vid,(SELECT GROUP_CONCAT(vid) FROM `uservendor` WHERE uid = ? && (role='ROLE_ADMIN'||role='ROLE_VENDOR')))",
+  "getWeChatTarget":"SELECT ?? FROM `user` WHERE FIND_IN_SET(id,(SELECT GROUP_CONCAT(uid) FROM `uservendor` WHERE FIND_IN_SET(vid,?)))",
+  "getRegisterUser":"SELECT ?? from `user` where id in (SELECT uid FROM `serviceResult` WHERE sd=?&&status=?)"
 }
 

@@ -44,6 +44,15 @@ App.config(['$routeProvider',function ($routeProvider) {
     }).when(magic.NG_VENDOR_SERVICEVIEW,{
         templateUrl:magic.URL_VENDOR_SERVICEVIEW,
         controller:"serviceView"
+    }).when(magic.NG_STUDENT_INFO,{
+        templateUrl:magic.URL_VENDORUSER,
+        controller:'userInfo'
+    }).when(magic.NG_USER_TYPE,{
+        templateUrl:magic.URL_USER_INFO,
+        controller:'userInfoUpdate'
+    }).when(magic.NG_USER_PASSWORD,{
+        templateUrl:magic.URL_USER_PASSWORD,
+        controller:'password'
     }).otherwise({
         redirectTo:magic.NG_VENDOR_HOME
     });

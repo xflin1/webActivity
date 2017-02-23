@@ -45,5 +45,60 @@ module.exports = {
     },
     registerMain:function(req,res){
         res.render("./register/register");
+    },
+    userInfo:function(req,res){
+        var id=req.session.uid;
+        if(!id){
+            return;
+        }
+        User.getById(id,
+            ['name','nickname','sex','qq','email','phone','photoId'])
+            .then(function(rows){
+                //res.json(rows);
+                utils.normalGet(rows,res,'list');
+            }).catch(function(error){
+                utils.normalError(res);
+                utils.handleError(error);
+            });
+    },
+    userInfoUpdate:function(req,res){
+        res.render("./user/updateUserInfo");
+    },
+    passwordUpdate:function(req,res){
+        res.render("./user/password");
+    },
+    userInfoModify:function(req,res){
+        var user = req.body;
+
+        var reply = {};
+        if(!user) {
+            reply.code = CODE_ERR;
+            reply.msg = "parameter is null";
+            res.end(JSON.stringify(reply));
+            return;
+        }
+
+        var suid=req.session.uid;
+        if(!suid){
+            reply.code = CODE_ERR;
+            reply.msg = "id is null";
+            res.end(JSON.stringify(reply));
+            return;
+        }
+
+        User.updateById(suid,user)
+        .then(function(rows){
+            //res.json(rows);
+            utils.normalUpdate(rows,res,'list');
+        }).catch(function(error){
+            utils.normalError(res);
+            utils.handleError(error);
+        });
+    },
+    adminInfo:function(req,res){
+        res.render("./index/childPages/userInfo");
+    },
+    vendorInfo:function(req,res){
+        res.render("./vendor/childPages/userInfo");
     }
 };

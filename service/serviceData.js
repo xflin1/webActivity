@@ -98,5 +98,93 @@ module.exports = {
             format = [fields,uid,start,limit];
         }
         return base.baseQuery(query,format);
+    },
+    /**
+     * 根据vid集合获取数据列表
+     * @param {string} vidG vid的集合
+     * @param limit
+     * @param start
+     * @param fields
+     * @param order
+     * @param asc
+     * @param [st]
+     * @returns {*|bluebird}
+     */
+    findData:function(vidG,limit,start,fields,order,asc,st){
+        var query ;
+        var format;
+        if(st===undefined){
+            query = sqlCmd.getDataTarget;
+            format = [fields,vidG];
+        }else{
+            query = sqlCmd.getDataTargetBySt;
+            format = [fields,st,vidG];
+        }
+        if(order!=undefined){
+            query = query + ' ORDER BY `'+ order;
+            if(asc){
+                query=query+ '` ASC';
+            }else{
+                query = query + '` DESC';
+            }
+        }
+        query = query + ' LIMIT ' + start + ',' + limit;
+        return base.baseQuery(query,format);
+    },
+    /**
+     * 获取可见范围内指定的sd的详情
+     * @param vidG 可见范围vid集合
+     * @param sd
+     * @param fields
+     * @returns {*|bluebird}
+     */
+    getDataBySd:function(vidG,sd,fields){
+        var query  = sqlCmd.getDataBySd;
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [vidG,sd];
+
+        }else{
+            format = [fields,vidG,sd];
+        }
+        return base.baseQuery(query,format);
+    },
+    /**
+     * 根据在serviceResult中status获取匹配的记录
+     * @param uid
+     * @param status
+     * @param st
+     * @param limit
+     * @param start
+     * @param fields
+     * @param order
+     * @param asc
+     * @returns {*|bluebird}
+     */
+    findDataByStatusSt:function(uid,status,st,limit,start,fields,order,asc){
+        var query = sqlCmd.findDataByStatusSt;
+        if(order!=undefined){
+            query = query + ' ORDER BY `'+ order;
+            if(asc){
+                query=query+ '` ASC';
+            }else{
+                query = query + '` DESC';
+            }
+        }
+        query = query + ' LIMIT ' + start + ',' + limit;
+        return base.baseQuery(query,[fields,uid,status,st]);
+    },
+    getAdminData:function(sd,uid,fields){
+        var query = sqlCmd.getAdminData;
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [sd,uid];
+
+        }else{
+            format = [fields,sd,uid];
+        }
+        return base.baseQuery(query,format);
     }
 };

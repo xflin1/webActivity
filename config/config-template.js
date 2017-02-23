@@ -33,6 +33,18 @@ module.exports={
                 "pollInterval": 1
             }
         ]
+    },
+    upload:{
+        tmp:path.join(__dirname,'../uploads/tmp'),
+        save:path.join(__dirname,'../uploads/user'),
+        thumbnails:path.join(__dirname,'../uploads/thumbnail')
+    },
+    wechat:{
+        corpid : "wx3348d8d51353fb39",
+        corpsecret : "74wx3s8E6LHBYYbxS6mj_QMlzlBncTM-fej0R8YqeHK5PerhCaRYks7_6V28Q5Hw",
+        agentid:"4",
+        off:true //是否发消息到wechat是的开关,false为打开
     }
+
 
 };

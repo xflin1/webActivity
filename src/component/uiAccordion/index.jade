@@ -1,0 +1,13 @@
+input.ui-accordion-input(type='checkbox' ng-model='checkBox' )
+label.ui-accordion-label.weui-cell.weui-cell_access(ng-click='toggleAccordion()')
+    .weui-cell__hd
+        i.fa(ng-class='accordionFa')
+    .weui-cell__bd.weui-cell_primary {{accordionName}}
+    .weui-cell__ft
+ul.ui-submenu(ng-style='subStyle')
+    li(ng-repeat='menu in subMenu track by $index')
+        a.weui-cell.weui-cell_access(ng-href='{{menu.href}}')
+            .weui-cell__hd
+            .weui-cell__bd.weui-cell_primary {{menu.name}}
+            .weui-cell__ft
+

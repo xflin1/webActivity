@@ -1,0 +1,192 @@
+.leftBar
+{
+    float: left;
+    width:20%;
+    margin-top:2%;
+    margin-left: 8%;
+}
+#login_background
+{
+
+    background-color:red;
+    border-left: 1px solid #ff0000;
+    border-right: 1px solid #ff0000;
+    padding: 0 20px 0 20px;
+    margin: auto;
+    font: 1.5em arial, verdana, sans-serif;
+    width: 85%;
+    min-height: 100%;
+}
+.logCss
+{
+    margin-left: 30%;
+    width:40%;
+}
+.red1
+{
+    background-color: red;
+}
+.margin
+{
+    margin-bottom:  2%;
+    margin-top:  2%;
+}
+.margin_login
+{
+    margin-bottom:  5%;
+    margin-top:  3%;
+}
+.right_down
+{
+    position:relative;
+    left: 50%;
+    top: 10px;
+    color: green;
+}
+.left
+{
+    position:relative;
+    right:15%;
+    color: green;
+}
+.green
+{
+    position:relative;
+    left:6px;
+    top:8px;
+    color:green;
+}
+.rd_person
+{
+   position:relative;
+    left:30%;
+}
+.rd_company
+{
+    position:relative;
+    left:50%;
+}
+.rightSight
+{
+   position:relative;
+    left:5%;
+    top:25px;
+    width:65%;
+}
+.hand
+{
+    cursor:pointer;
+    text-decoration:none;
+}
+.bordered
+{
+
+    border:1px solid red;
+}
+.bordered2
+{
+    border:1px solid #2b542c;
+}
+
+.imgLabel
+{
+    position:relative;
+    width:20%;
+}
+.label-center
+{
+    text-align: center;
+}
+.margin-bottom
+{
+    margin-bottom: 4%;
+}
+.margin-top-md
+{
+    margin-top: 5%;
+}
+.rightAct
+{
+    position: relative;
+    left:5%;
+    top:25px;
+}
+.small
+{
+    width:60px;
+    height:60px;
+}
+.account_plus
+{
+    position:relative;
+    width:30px;
+    height:30px;
+    left:3px;
+    bottom:6px;
+}
+.left_down
+{
+    position: relative;
+    left:-4%;
+    top:30px;
+}
+.up_time
+{
+    position: relative;
+    top:-26px;
+}
+.required
+{
+    color:red;;
+    font-size: 150%;
+}
+.objectBorder
+{
+    border:1px solid #A8A8A8;
+    width:80%;
+}
+.roundImg
+{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    border:1px solid #e4e4e4;
+    overflow:hidden;
+}
+.option
+{
+    display:inline-block;
+    border:1px solid green;
+    padding:.25em;margin:.5em .5em 0 0;
+}
+.option.selected
+{
+    background:green;
+    color:white;
+}
+.center{
+    text-align: center;
+}
+.small_margin{
+    margin-bottom: 1%;
+}
+.active
+{
+    border-bottom: solid 2px green;
+}
+.rightBorder
+{
+    border-right: 1px solid green;
+}
+.leftBorder
+{
+    border-left: 1px solid green;
+}
+.font-white
+{
+    color:red;
+}
+.smallBorder
+{
+    border-right:1px solid white;
+}

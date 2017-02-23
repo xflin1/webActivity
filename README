@@ -1,0 +1,45 @@
+文件结构
+    |-config---<配置文件>
+    |-build----<web编译后的文件>
+        |-page1+...
+        |-page2
+        |   |-childPages
+        |   |       |-childPage1.jade--<子页面>
+        |   |       |-childPage2.jade--<子页面>
+        |   |       |-*.jade
+        |   |
+        |   |-index.jade--------<主页面>
+        |   |-index.bundle.js---<合并后的js>
+        |   |-style.css---------<合并后的css>
+        |-page*
+    |-src-----<web源文件>
+        |-directives
+        |       |-directives1-+...
+        |       |-directives2
+        |           |-directives.jade---<directive>
+        |           |-directives.js-----<directive js>
+        |-pages
+            |-page1+...
+            |-page2---<页面文件模板>
+            |       |-childPages----<子页面文件>
+            |       |       |-childPage1
+            |       |       |-childPage2--<子页面文件模板>
+            |       |       |       |-childPage.jade---<子页面>
+            |       |       |       |-childPage.js-----<子页js>
+            |       |       |       |-style.css--------<子页css>
+            |       |       |-...
+            |       |
+            |       |-index.jade---<主页面>
+            |       |-index.js-----<主页js>
+            |       |-main.js------<webpack入口文件>
+            |       |-style.css----<主页css>
+            |-page*+...
+    |-template---<web模板文件>
+    |-controller-<server控制文件>
+    |-util-------<server工具文件>
+    |-doc--------<文档文件>
+    |-db---------<数据表处理>
+    |-node_modules
+    |-package.json
+    |-gulpfile.js
+    |-webpack.config.js

@@ -1,0 +1,20 @@
+header.bar.bar-nav
+    a.fa.fa-arrow-left.we-myfa(href="#/info",style="float:left;")
+    span.title(style='width:70%;margin-left:30px;') 个人信息修改
+.scrollable(style="margin-top:50px;")
+    .scrollable-content.section
+        .form-group(ng-hide='type=="sex"')
+            label(style="padding-left:10px;") {{template[type]}}
+            input.form-control(ng-model='info')
+        .form-group(ng-show='type=="sex"')
+            label.col-xs-12.control-label 性别:
+            .col-xs-8.text-center
+                label.radio-inline
+                    input(type='radio' value=0 ng-model='info')
+                    | 男
+                label.radio-inline
+                    input(type='radio' value=1 ng-model='info')
+                    | 女
+            legend
+        button.btn.btn-success.btn-block(ng-click='submit(info)') {{submitting}}
+

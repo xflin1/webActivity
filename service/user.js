@@ -1,6 +1,7 @@
 var Promise = require('bluebird');
 var getSqlConnection = require('../util/DBConnection.js');
 var base = require('./base.js');
+var sqlCmd = require('./sqlCmd.json');
 const TABLE = 'user';
 var TABLE_FIELDS = ['name','nickname','pass','sex','role', 'groupId',
         'weixin', 'qq','email','phone','photoId','extattrs','last']; //表字段
@@ -29,6 +30,10 @@ module.exports = {
             'pass':pass,
             'role':role
         };
+        return base.insertBase(TABLE,values);
+    },
+
+    insertBase:function(values){
         return base.insertBase(TABLE,values);
     },
     /**
@@ -67,7 +72,7 @@ module.exports = {
     },
     /**
      * 根据id获取记录
-     * @param {string} id
+     * @param {int} id
      * @param {Array} [fields]      需要获取的字段
      * @returns {bluebird}
      */
@@ -85,5 +90,23 @@ module.exports = {
     },
     getAll:function(fields){
         return base.getBaseMulti(TABLE,{},fields);
+    },
+    /**
+     * 获取制定vidG内的所有用户
+     * @param vidG
+     * @param fields
+     * @returns {*|bluebird}
+     */
+    getWeChatTarget:function(vidG,fields){
+        var query = sqlCmd.getWeChatTarget;
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [vidG];
+
+        }else{
+            format = [fields,vidG];
+        }
+        return base.baseQuery(query,format);
     }
 };

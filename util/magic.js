@@ -37,6 +37,16 @@ module.exports={
      * list单页获取条数
      */
     SIGNAL_PAGE:4,
+    /**
+     * userVendor中role
+     */
+    ROLE_ADMIN:'ROLE_ADMIN',
+    ROLE_VENDOR:'ROLE_VENDOR',
+    ROLE_USER:'ROLE_USER',
+    /**
+     * serviceId
+     */
+    AR_ID:2,//ar业务
 
     /**
      * url
@@ -48,7 +58,12 @@ module.exports={
     URL_GROUP_REJECT:'',
     URL_USER:'/user',
     URL_USER_SELF:'/user',
+    URL_USER_SELF_TYPE:'/user',
+    URL_USER_INFO:'/userInfo',
+    URL_USER_MODIFY:'/user/mod',
     URL_USER_BY_ID:'',
+    URL_USER_PASSWORD:'/password',
+    URL_ADMINUSER:'/auser',
 
     URL_ACTION_LIST:'/serviceAction/list',
     URL_ACTION_ADD:'/serviceAction/add',
@@ -84,6 +99,7 @@ module.exports={
     URL_VENDOR_HOME:'/vendor/home',
     URL_REGISTER:'/student/register',
 
+    URL_VENDORUSER:'/vuser',
     URL_VENDOR_SETTING:'/vendor/setting',
     URL_VENDOR_UPDATE:'/vendor/update/:id',
     URL_VENDOR_SERVICEMANAGE:'/vendor/serviceManage',
@@ -111,6 +127,7 @@ module.exports={
     URL_STUDENT_MANAGE:'/student/manage',
     URL_STUDENT_MANAGE_VENDOR:'/student/manageVendor',
     URL_STUDENT_ADD_LIST:'/student/addList',
+    URL_STUDENT_INFO:'/student/info',
 
     /*URL_REGISTER_LIST:'/vendorRegister/list',*/
     URL_REGISTER_DETAIL:'/actionRegister/list/:id',
@@ -121,6 +138,7 @@ module.exports={
 
     URL_LOADER_INDEX:'/loader',
     URL_LOADER_ADD_INDEX:'/loader/addIndex',
+    URL_LOADER_ADMIN:'/loader/admin',
     URL_LOADER:'/loader',
     URL_LOADER_SUBMIT:'/loader/submit',
     URL_LOADER_CANCEL:'/loader/cancel',
@@ -129,12 +147,48 @@ module.exports={
     URL_LOADER_ADD:'/loader/add',
     URL_LOADER_ADD_SUBMIT:'/loader/add/submit',
     URL_LOADER_MANAGE:'/loader/manage',
+    URL_LOADER_MANAGE_INDEX:'/loader/manageIndex',
 
 
+    URL_SERVICE_USER_ACTION:'/service/user/action/:action',
+    URL_SERVICE_USER_LOADER:'/service/user/loader',
+    URL_SERVICE_USER_SUBMIT:'/service/user/submit',
+    URL_SERVICE_USER_LIST_DATA:'/service/user/list/data',
+    URL_SERVICE_USER_DATA:'/service/user/data',
+    URL_SERVICE_USER_PERSONAL:'/service/user/personal',
+    URL_SERVICE_USER_LIST_PERSONAL:'/service/user/list/personal',
+
+    URL_SERVICE_ADMIN_ACTION:'/service/admin/action/:action',
+    URL_SERVICE_ADMIN_LOADER:'/service/admin/loader',
+    URL_SERVICE_ADMIN_DELETE:'/service/admin/delete',
+    URL_SERVICE_ADMIN_LIST_DATA:'/service/admin/list/data',
+    URL_SERVICE_ADMIN_DATA:'/service/admin/data',
+    URL_SERVICE_ADMIN_LIST_VENDOR:'/service/admin/list/vendor',
+    URL_SERVICE_ADMIN_LIST_TYPE:'/service/admin/list/type',
+    URL_SERVICE_ADMIN_UPDATE:'/service/admin/update',
+    URL_SERVICE_ADMIN_REGISTER_USER:'/service/admin/register/user',
+
+    URL_SERVICE_PUBLISH_ACTION:'/service/publish/action/:action',
+    URL_SERVICE_PUBLISH_LOADER:'/service/publish/loader',
+    URL_SERVICE_PUBLISH_SUBMIT:'/service/publish/submit',
+    URL_SERVICE_PUBLISH_TARGET:'/service/publish/target',
+
+    URL_ROLE_TARGET:'/role/target',
+    URL_ROLE_SET:'/role/set',
+
+    URL_AUDIT_VENDOR_LIST:'/audit/vendor/list',
+    URL_AUDIT_VENDOR:'/audit/vendor',
+    URL_AUDIT_CHECK:'/audit/check',
+    URL_AUDIT_UPDATE:'/audit/update',
 
     /**
      * 前端路由地址
      */
+
+    NG_USER_TYPE:'/userInfo:type',
+    NG_USER_PASSWORD:'/changePassword',
+
+
     NG_ACTION_ADD:'/serviceAction/add',
     NG_ACTION_ADD_SUCCESS:'/serviceAction/addSuccess',
     NG_ACTION_ADD_FAIL:'/serviceAction/addFail',
@@ -175,14 +229,31 @@ module.exports={
     NG_STUDENT_SIGNED:'/signed',
     NG_STUDENT_LOADER:'/loader/:id',
     NG_STUDENT_LOADER_COMPLETE:'/signed/:id',
-    NG_STUDENT_LOADER_ADD:'/loader/add/:vid',
+    NG_STUDENT_LOADER_ADD:'/loader/add/:vid&:st',
+    NG_STUDENT_LOADER_MANAGE:'/loader/manage/:vid&:id',
     NG_STUDENT_MANAGE:'/manage',
     NG_STUDENT_MANAGE_VENDOR:'/manage/:vid',
     NG_STUDENT_ADD_LIST:'/manage/list/:vid',
-
+    NG_STUDENT_INFO:'/info',
+    NG_STUDENT_ADMIN_LOADER:'/loader/admin/:vid&:id',
     /**
      * component url;
      */
     COMPONENT_DROP_MENU:'/component/dropMenu',
-    COMPONENT_UPLOADER:'/component/uploader'
+    COMPONENT_UPLOADER:'/component/uploader',
+    COMPONENT_CAROUSEL:'/component/carousel',
+    COMPONENT_ACCORDION:'/component/accordion',
+    /**
+     * upload 参数
+     */
+    CHUNK_SIZE:1000*1024*2,
+    IMAGE_WIDTH:640,
+    IMAGE_QUALITY:1,
+    URL_UPLOAD:'/upload',
+    URL_UPLOAD_STATUS:'/upload/status',
+    URL_UPLOAD_GET:'/upload/file/:fid',
+    URL_UPLOAD_GET_IMG_STATIC:'/images/:fid',
+    URL_UPLOAD_GET_IMG_THUMBNAIL:'/thumbnail/:fid',
+    URL_UPLOAD_CANCEL:'/upload/cancel'
+
 };

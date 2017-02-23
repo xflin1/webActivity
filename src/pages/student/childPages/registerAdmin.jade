@@ -1,0 +1,28 @@
+
+div(ng-controller='registerAdmin')
+    div(ui-carousel='image')
+    .weui-panel__hd
+        h1.h1 {{content.name}}
+    .weui-panel__bd
+        .weui-media-box.weui-media-box_small-appmsg
+            .weui-cells(ng-hide='false')
+                a.weui-cell.ui-cell(href="javascript:;")
+                    .weui-cell__hd
+                        .fa.fa-clock-o
+                        | 时间:
+                    .weui-cell__bd 2016-01-01 00:00
+            .weui-cells
+                a.weui-cell.ui-cell(href="javascript:;")
+                    .weui-cell__hd
+                        .fa.fa-map-marker
+                        | 详情:
+            .ui-page.page__bd
+                article
+                    section
+                        p.p {{content.content}}
+            ul.ui-accordion
+                li(ui-accordion='accordionData')
+
+
+
+

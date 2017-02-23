@@ -1,0 +1,33 @@
+include ../../../common/header
+
+div.weui-panel.weui-panel_access
+    div.weui-panel__ft
+        .weui-cells(style='margin-top:0rem;')
+            .weui-cell
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p 头像
+                .weui-cell__ft.we-info
+                    div(logo-src='')
+            a.weui-cell(href='#/userInfonickname')
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p 昵称
+                .weui-cell__ft.we-info {{selfInfo.nickname}}
+            a.weui-cell(href='#/userInfoqq')
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p QQ
+                .weui-cell__ft.we-info {{selfInfo.qq}}
+            a.weui-cell(href='#/userInfoemail')
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p Email
+                .weui-cell__ft.we-info {{selfInfo.email}}
+            a.weui-cell(href='#/userInfophone')
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p 手机
+                .weui-cell__ft.we-info {{selfInfo.phone}}
+            a.weui-cell(href='#/userInfosex')
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p 性别
+                .weui-cell__ft.we-info {{selfInfo.sex==0?'男':'女'}}
+            a.weui-cell(href='#/changePassword')
+                .weui-cell__bd.weui-cell_primary.we-label
+                    p 更改密码

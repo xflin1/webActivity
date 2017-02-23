@@ -10,7 +10,7 @@ var RedisStore = connectRedis(session);
 var sessionStore = new RedisStore(config.redisConf);
 var sessionParser = session({
   secret: 'sessionSecret123456',
-  maxAge:'10000',
+  maxAge:'2592000000',
   store: sessionStore,
   resave: true,
   saveUninitialized: true
@@ -66,42 +66,10 @@ app.use(webpackMiddleware(webpack(webpackConfig),{
   serverSideRender: false
   // Turn off the server-side rendering mode. See Server-Side Rendering part for more info.
 }));
-
 require('./controller/serverInit.js')(app,sessionParser,sessionStore);
-/**
- *
- */
-
-var multiparty = require('connect-multiparty');
-var path = require('path');
-var fs = require('fs-promise');
-var multipartMiddleware = multiparty({uploadDir:config.upload.tmp});
-var md5 = require('md5');
-var md5file = require('md5-file');
-app.post('/upload',multipartMiddleware,function(req,res){
-  console.log(req.body, req.files);
-  console.log(md5file.sync(req.files.file.path))
-  if(req.body['_chunkNumber'] == 0){
-    console.log(md5file.sync(req.files.file.path))
-    fs.readFile(req.files.file.path).then(function(data){
-      var array = [].slice.call(data)
-      console.log('test'+md5(array));
-    });
-  }
-  /*fs.rename(req.files.file.path,path.join(config.upload.tmp,'./test.jpg'+req.body._chunkNumber))
-      .then(function(){
-        res.json({code:0})
-      }).catch(function(err){
-      console.log(err);
-  });*/
-});
-app.get('/ttt',function(req,res){
-  var stream = fs.createReadStream(path.join(__dirname,'./tmp/test.jpg0'));
-  stream.pipe(res);
-  stream = fs.createReadStream(path.join(__dirname,'./tmp/test.jpg1'));
-  stream.pipe(res);
-});
-
+require('./controller/api.js')(app);
+require('./controller/service.js')(app);
+require('./controller/fileUpload.js')(app);
 require('./routes/handler.js')(app);
 require('./controller/errorController.js')(app);
 console.log("Init ok...");

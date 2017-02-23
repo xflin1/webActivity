@@ -1,0 +1,7 @@
+div(ui-content-for='navBar')
+    i.icon.fa.fa-angle-left.pull-left(ng-click='back()')
+    a.pull-right(data-toggle="dropdown",href="javascript:void(0)")
+        i.icon.fa.fa-plus-circle.fa-inverse
+    div(ui-drop-menu='menus')
+    h1.title 管理
+div(ng-include='loaderInfo.src')

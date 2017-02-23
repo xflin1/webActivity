@@ -2,6 +2,7 @@ var Promise = require('bluebird');
 var getSqlConnection = require('../util/DBConnection.js');
 var base = require('./base.js');
 var utils = require('../util/utils.js');
+var sqlCmd = require('./sqlCmd.json');
 const TABLE = 'serviceResult';
 var TABLE_FIELDS = ['sd','uid','error','msgAttrs','ts','status']; //表字段
 
@@ -61,5 +62,17 @@ module.exports = {
      */
     getByUidSd:function(uid,sd,fields){
         return base.getBaseMulti(TABLE,{uid:uid,sd:sd},fields);
+    },
+    getRegisterUser:function(sd,status,fields){
+        var query = sqlCmd.getRegisterUser;
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [sd,status];
+
+        }else{
+            format = [fields,sd,status];
+        }
+        return base.baseQuery(query,format);
     }
 };

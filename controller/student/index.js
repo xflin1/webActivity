@@ -45,6 +45,8 @@ module.exports = {
     },
     addList:function(req,res){
         res.render("./student/childPages/addList");
+    },
+    info:function(req,res){
+        res.render("./student/childPages/userInfo");
     }
-
 };

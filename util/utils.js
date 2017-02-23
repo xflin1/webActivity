@@ -1,3 +1,6 @@
+var fs  = require('fs');
+var path  = require('path');
+var log = require('./log.js');
 module.exports = {
     createJson:function(array,src,des){
         var length = array.length;
@@ -102,7 +105,7 @@ module.exports = {
      * @param error
      */
     handleError:function(error){
-
+        log.logger('util').error(error.stack);
     },
     /**
      * 给对象添加时间戳
@@ -222,14 +225,22 @@ module.exports = {
         }
     },
     /**
-     * 将数据库中msgAttrs属性转换成对象
+     * 将数据库中msgAttrs或extattrs属性转换成对象
      * @param rows
      */
     analyseExtra:function(rows){
         var length = rows.length;
         for(var i=0;i<length;i++){
-            if(rows[i].hasOwnProperty('msgAttrs')){
+            if(rows[i]['msgAttrs']!==undefined
+                &&rows[i]['msgAttrs']!==""
+                &&rows[i]['msgAttrs']!==null){
                 rows[i]['msgAttrs'] = JSON.parse(rows[i]['msgAttrs']);
+            }
+            if(rows[i].hasOwnProperty('extattrs')){
+                if(rows[i]['extattrs']!==undefined
+                    &&rows[i]['extattrs']!==""
+                    &&rows[i]['extattrs']!==null)
+                rows[i]['extattrs'] = JSON.parse(rows[i]['extattrs']);
             }
         }
     },
@@ -240,5 +251,66 @@ module.exports = {
      */
     parserActions:function(actions){
         return actions.split('[')[1].split(']')[0].split(',');
+    },
+    /**
+     * 根据路径新建文件夹,中间不存则递归新建
+     * @param dirPath
+     */
+    mkdir: function(dirPath){
+        if(!fs.existsSync(dirPath)){
+            this.mkdir(path.dirname(dirPath));
+            fs.mkdirSync(dirPath);
+        }
+    },
+    /**
+     * 合并重复数据,理论应该不会出现重复数据
+     * @param data
+     * @returns {Array}
+     */
+    mergeVendor:function(data){
+        var dataLength = data.length;
+        var tmpObject = {};
+        var tmpArray = [];
+        var rowsLength;
+        var rows;
+        var id;
+        for(var i =0;i<dataLength;i++){
+            rows=data[i];
+            rowsLength=rows.length;
+            for(var j=0;j<rowsLength;j++){
+                id = rows[j]['id'];
+                if(!tmpObject.hasOwnProperty(id)){
+                    tmpObject[id]=rows[j];
+                }
+            }
+        }
+
+        for(var key in tmpObject){
+            if(tmpObject.hasOwnProperty(key)){
+                tmpArray.push(tmpObject[key]);
+            }
+        }
+
+        return tmpArray;
+    },
+    /**
+     * 检测参数是否完整
+     * @param req
+     * @param res
+     * @param params
+     * @returns {boolean}
+     */
+    checkParam:function(req,res,params){
+        var length = params.length;
+        for(var i=0;i<length;i++){
+            if(req.body[params[i]]===undefined){
+                res.json({
+                    code:-1,
+                    msg:'参数异常'
+                });
+                return false;
+            }
+        }
+        return true;
     }
 };

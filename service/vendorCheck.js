@@ -14,6 +14,19 @@ module.exports = {
      */
     insert:function(values){
         return base.insertBase(TABLE,values);
-    }
+    },
+    /**
+     * 根据vid获取记录
+     * @param vid
+     * @param fields
+     * @returns {*|bluebird}
+     */
+    getByVid:function(vid,fields){
+        return base.getBaseMulti(TABLE,{vid:vid},fields);
+    },
+
+    updateByVid:function(vid, values){
+        return base.updateBaseMulti(TABLE,values,{vid:vid});
+    },
 
 };

@@ -12,4 +12,4 @@ exports.student = require('./student');
 exports.register = require('./register');
 exports.validate = require('./validate');
 exports.loader = require('./loader');
-exports.file=require('./file');
+/*exports.file=require('./file');*/

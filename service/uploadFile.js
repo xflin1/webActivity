@@ -33,6 +33,15 @@ module.exports = {
         return base.deleteBaseMulti(TABLE,{fid:fid});
     },
     /**
+     * 根据fid,uid删除记录
+     * @param fid
+     * @param uid
+     * @returns {*|bluebird}
+     */
+    deleteByFidUid:function(fid,uid){
+        return base.deleteBaseMulti(TABLE,{fid:fid,uid:uid});
+    },
+    /**
      * 根据id更新记录
      * @param {string} id
      * @param {object} values

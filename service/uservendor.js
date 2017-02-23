@@ -3,7 +3,7 @@ var base = require('./base.js');
 var sqlCmd = require('./sqlCmd.json');
 const TABLE = 'uservendor';
 var TABLE_FIELDS = ['vid','uid','role']; //表字段
-
+var magic = require('../util/magic.js');
 
 module.exports = {
     /**
@@ -80,6 +80,9 @@ module.exports = {
     getByUid:function(uid, fields){
         return base.getBaseMulti(TABLE,{uid:uid},fields);
     },
+    getAdmin:function(uid, fields){
+        return base.getBaseMulti(TABLE,{uid:uid,role:magic.ROLE_ADMIN},fields);
+    },
     /**
      *
      * @param {number}  uid
@@ -87,9 +90,16 @@ module.exports = {
      * @returns {bluebird}
      */
     getVendorByUid:function(uid, fields){
-        fields = fields||'*';
         var query = sqlCmd.getVendorByUid;
-        return base.baseQuery(query,[fields,uid]);
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [uid];
+
+        }else{
+            format = [fields,uid];
+        }
+        return base.baseQuery(query,format);
     },
     /**
      *
@@ -98,9 +108,16 @@ module.exports = {
      * @returns {bluebird}
      */
     getUserByVid:function(gid, fields){
-        fields = fields||'*';
         var query = sqlCmd.getUserByVid;
-        return base.baseQuery(query,[fields,gid]);
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [gid];
+
+        }else{
+            format = [fields,gid];
+        }
+        return base.baseQuery(query,format);
     },
     /**
      * 判断是否有该vid的控制权限
@@ -111,8 +128,14 @@ module.exports = {
      * @returns {*|bluebird}
      */
     getByUidVid:function(uid,vid,role,fields){
-        role=role|'ROLE_USER';
-        return base.getBaseMulti(TABLE,{uid:uid,vid:vid,role:role},fields);
+        var condition = {
+            uid:uid,
+            vid:vid
+        };
+        if(role!==undefined){
+            condition['role']=role;
+        }
+        return base.getBaseMulti(TABLE,condition,fields);
     },
     /**
      * 获取普通用户可控制的关联企业列表
@@ -121,9 +144,49 @@ module.exports = {
      * @returns {*|bluebird}
      */
     getManageByUid:function (uid,fields) {
-        fields = fields||'*';
         var query = sqlCmd.getMangeByUid;
-        return base.baseQuery(query,[fields,uid]);
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [uid];
+
+        }else{
+            format = [fields,uid];
+        }
+        return base.baseQuery(query,format);
+    },
+    /**
+     * 根据uid和vid获取role
+     * @param uid
+     * @param vid
+     * @returns {*|bluebird}
+     */
+    getRole:function(uid,vid){
+        return base.getBaseMulti(TABLE,{uid:uid,vid:vid},['role']);
+    },
+    /**
+     * 根据uid获取vid:1,2,3形式的所有vid
+     * @param uid
+     * @returns {*|bluebird}
+     */
+    getUserVendor:function(uid){
+        var query = sqlCmd.getUserVendor;
+        return base.baseQuery(query,uid)
+    },
+    /**
+     *
+     */
+    getVendorList:function(uid,fields){
+        var query = sqlCmd.getVendorList;
+        var format;
+        if(fields===undefined){
+            query = query.replace('??','*');
+            format = [uid];
+
+        }else{
+            format = [fields,uid];
+        }
+        return base.baseQuery(query,format);
     }
 };
 

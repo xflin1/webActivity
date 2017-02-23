@@ -1,0 +1,86 @@
+<div ui-content-for="title">
+
+</div>
+<div>
+    <div class="bordered2" style="margin-left: 10%;margin-right: 10%;">
+        <!--显示图片-->
+        <div class="bordered2" style="float:left;">
+            <button ng-show=(!manageData.image||manageData.image=="null") style="width:400px;height: 260px;" class="text-center">暂无图片</button>
+            <img ng-src="/api/upload/images/{{manageData.image}}" style="width:400px;height: 260px;" ng-show=(manageData.image&&manageData.image!="null")>
+        </div>
+        <!--活动相关信息-->
+        <div class="col-md-offset-5  " style="width:50%;">
+            <div ng-show="editTitleClicked" style="width:50%;">
+                <input type="text"
+                       ng-model="edit.title"
+                       class="form-control ">
+            </div>
+            <h2 ng-hide="editTitleClicked">名称：{{manageData.name}}<br></h2>
+            <div class="small_margin">
+                <i class="glyphicon glyphicon-time"></i> 时间：{{manageData.msgAttrs.start_time*1000|date:'yyyy/MM/dd HH:mm'}}--{{manageData.msgAttrs.end_time*1000|date:'yyyy/MM/dd HH:mm'}}<br>
+            </div>
+            <div class="small_margin">
+                <i class="glyphicon glyphicon-map-marker"></i><font color="blue"> 地点：{{manageData.msgAttrs.province}}(省/直辖市){{manageData.msgAttrs.city}}{{manageData.msgAttrs.location}}</font><br>
+            </div>
+            <div class="small_margin">
+                <i class="glyphicon glyphicon-list-alt"></i> 限额{{manageData.msgAttrs.number}}人<br>
+            </div>
+            <div >
+                <i class="glyphicon glyphicon-record"></i> <img style="width:35px;height:35px;"
+                                                                ng-src="/api/upload/images/{{publishUser.photoId}}"> <font color="blue">{{publishUser.extattrs.realName}}</font><br>
+            </div>
+            <!--按钮div-->
+            <div class="col-md-offset-10  ">
+                <button
+                        class="btn btn-primary"
+                        style="margin-bottom: 1%;"
+                        ng-hide="editTitleClicked"
+                        ng-click="editTitle( )">编辑标题</button>
+                <button
+                        class="btn btn-primary"
+                        style="margin-bottom: 1%;"
+                        ng-show="editTitleClicked"
+                        ng-click="editTitleConfirm(edit)">确定修改</button>
+                <button
+                        class="btn btn-primary"
+                        style="margin-top:7%;margin-bottom:14%;"
+                        ng-disabled="true"
+                        ng-click="">我要报名</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="bordered2 margin" style="height:200px;margin-left: 10%;margin-right: 10%;">
+        <!--&lt;!&ndash;显示图片&ndash;&gt;-->
+        <!--<div class="bordered2 margin" style="margin-left:2%;float:left;">-->
+            <!--<button ng-show=(!manageData.image||manageData.image=="null") style="width:200px;height: 110px;" class="text-center">暂无图片</button>-->
+            <!--<img ng-src="/api/upload/images/{{manageData.image}}" style="width:200px;height: 110px;" ng-show=(manageData.image&&manageData.image!="null")>-->
+        <!--</div>-->
+        <div class="col-md-offset-1 margin" style="margin-right: 2%;height:150px;">
+            <div ng-show="editContentClicked" class="col-md-6">
+                <textarea rows="5"
+                       ng-model="edit.content"
+                       class="form-control">
+                </textarea>
+            </div>
+            <div ng-hide="editContentClicked">
+                活动内容:{{manageData.content}}
+            </div>
+            <button
+                    class="btn btn-primary   col-md-offset-10"
+                    style="margin-bottom: 1%;"
+                    ng-hide="editContentClicked"
+                    ng-click="editContent( )">编辑内容</button>
+            <button
+                    class="btn btn-primary   col-md-offset-10"
+                    style="margin-bottom: 1%;"
+                    ng-show="editContentClicked"
+                    ng-click="editContentConfirm(edit)">确定修改</button>
+
+            <!--<button-->
+                    <!--class="btn btn-primary col-md-offset-10"-->
+                    <!--style="margin-bottom: 1%;"-->
+                    <!--ng-click="editLimit(edit)">编辑权限</button>-->
+        </div>
+    </div>
+</div>

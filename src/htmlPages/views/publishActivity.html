@@ -1,0 +1,174 @@
+<div ui-content-for="title">
+
+</div>
+
+<form role="form" name="publishForm" class="rightAct container form-horizontal">
+    <div class="form-group"  >
+        <label  class="col-md-1 ">活动分类<span class="required">*</span></label>
+        <div class="col-md-2 ">
+            <select ng-model="act.msgAttrs.classify" name="classify" class="form-control">
+                <option>招聘</option>
+                <option>实习</option>
+                <option>兼职</option>
+                <option>户外</option>
+                <option>运动</option>
+                <option>老乡会</option>
+                <option>通知</option>
+                <option>其他</option>
+            </select>
+        </div>
+        <label for="name" class="col-md-1">填写名称<span class="required">*</span></label>
+        <div class="col-md-6">
+            <input id="name"
+                   name="name"
+                   type="text"
+                   class="form-control"
+                   placeholder="活动标题（不少于5个字）"
+                   ng-model="act.name">
+        </div>
+    </div>
+
+    <div class="form-group margin ">
+        <label for="cmbProvince"  class="col-md-1  ">选择地点<span class="required">*</span></label>
+        <div class="col-md-2">
+            <select id="cmbProvince"
+                    name="cmbProvince"
+                    class="form-control "
+                    ng-model="act.msgAttrs.province"></select>
+        </div>
+        <div class="col-md-2">
+            <select id="cmbCity"
+                    name="cmbCity"
+                    class="form-control"
+                    ng-model="act.msgAttrs.city"></select>
+        </div>
+        <div class="col-md-2">
+            <select id="cmbArea"
+                    name="cmbArea"
+                    class="form-control"
+                    ng-model="act.msgAttrs.location"></select>
+        </div>
+    </div>
+    <div  class="form-group">
+        <div>
+            <label for="start"  class="col-md-1   ">活动时间<span class="required">*</span></label>
+
+            <label for="start" class=" "
+                   style="margin-left:1%;">开始时间</label>
+            <label for="end" class=" "
+                   style="margin-left:29%;">结束时间</label>
+        </div>
+        <!--开始时间和结束时间-->
+        <div class="row">
+            <div class="col-md-3" >
+                <input id="start"
+                       name="start"
+                       type="datetime-local"
+                       class="form-control"
+                       ng-model="start_time">
+            </div>
+            <!--<div class="col-md-2  ">-->
+                <!--<input id="s_hour"-->
+                       <!--name="s_hour"-->
+                       <!--type="time"-->
+                       <!--class="form-control"-->
+                       <!--ng-model="act.msgAttrs.start_hour">-->
+            <!--</div>-->
+            <div class="col-md-3 col-md-offset-1">
+                <input id="end"
+                       name="end"
+                       type="datetime-local"
+                       class=" form-control"
+                       ng-model="end_time">
+
+            </div>
+            <!--<div class="col-md-2">-->
+                <!--<input id="e_hour"-->
+                       <!--name="e_hour"-->
+                       <!--type="time"-->
+                       <!--class=" form-control"-->
+                       <!--ng-model="act.msgAttrs.end_hour">-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="form-group">
+        <!--内容描述输入框-->
+        <label for="content"  class="col-md-1 ">详细内容<span class="required">*</span></label>
+        <div class="col-md-6">
+            <textarea id="content"
+                      name="content"
+                      class="form-control"
+                      ng-model="act.content"
+                      rows="10">
+
+            </textarea>
+        </div>
+        <!--上传图像插件-->
+        <div class="col-md-4" style="margin-left: 6%;">
+            <div id="imgPreview">
+                <!--<img ng-src="/api/upload/images/{{info.photoId}}"-->
+                     <!--style="height:180px;width:180px;"-->
+                     <!--ng-show=(info.photoId!=0) />-->
+                <button type="button"
+                        class="btn btn-default col-md-10"
+                        name="uploadImageButton"
+                        id="uploadImageButton"
+                        style="height:180px;width:180px;margin-top: 5px;">
+                    <!--ng-hide=(info.photoId!=0)-->
+                    <h1 class="text-center" style="font-family: '黑体';">上传图片</h1>
+                </button>
+            </div>
+            <input type="file"
+                   accept="image/*"
+                   name="uploadImage"
+                   id="uploadImage"
+                   ng-model="inputImg"
+                   onchange="angular.element(this).scope().publishUploadImg(this)"
+                   style="">
+        </div>
+
+    </div>
+    <!--发布目标-->
+    <div class="form-group margin">
+        <label class="col-md-1  ">发布目标<span class="required">*</span></label>
+        <div class="small col-md-2  ">
+            <img class="img-responsive hand" src="./images/img/u68.png" ng-click="displayTarget()" />
+        </div>
+
+
+        <div class="col-md-3 bordered2" style= "width:20%;margin-bottom: 1%;" ng-show="showTarget">
+            <label ng-show="targetEmpty">暂无发布目标,请联系管理员!</label>
+            <div style="margin-left: 5%;cursor:pointer;" class=" " ng-hide="targetEmpty">
+                    <span  class='option' ng-class="{'selected':x.selected}"
+                           ng-repeat="x in target"
+                           style="cursor:pointer;"
+                           ng-click="clickStatus_P(x)">
+                        {{x.name}}
+                    </span>
+            </div>
+            <button style="margin-top:3%;margin-left: 3%;margin-bottom: 3%"
+                    ng-click="submitChecked_P()">确定</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="num" class="col-md-1">活动人数</label>
+        <div class="col-md-2  ">
+            <input id="num"
+                   type="number"
+                   name="number"
+                   class="form-control "
+                   ng-model="act.msgAttrs.number">
+        </div>
+        <div class=" col-md-offset-5 col-md-2">
+            <button class="btn btn-primary btn-block"
+                    ng-disabled="(!publishForm.name.$dirty) || (!publishForm.cmbProvince.$dirty)
+                || (!publishForm.cmbCity.$dirty) || (!publishForm.content.$dirty)
+                || (!publishForm.start.$dirty) || (!publishForm.end.$dirty)
+                || (!publishForm.classify.$dirty) || (!act.target)
+                || (!publishForm.number.$dirty)"
+                    ng-click="publishAct(act)">发布</button>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,39 @@
+<div ui-content-for="title">
+
+</div>
+<!--暂无活动提示-->
+<div class="text-center">
+    <label ng-show=!activityNum class="text-muted">暂无活动哦,赶紧去发布吧~</label>
+</div>
+<div>
+    <!--<button class="btn primary col-md-offset-1" ng-click="getuserInfo()">-->
+        <!--GetUserInfo-->
+    <!--</button>-->
+
+    <div ng-repeat="x in activityData">
+        <div class="objectBorder margin col-md-offset-1">
+            <!--显示图片-->
+            <div class=" "  style="float:left;">
+                <button style="width:240px;height: 180px;" ng-show=(!x.image||x.image=="null") class="text-center">暂无图片</button>
+                <img style="width:240px;height: 180px;" ng-src="/api/upload/images/{{x.image}}" ng-show=(x.image&&x.image!="null")>
+            </div>
+
+            <!--显示活动相关信息-->
+            <div class="col-md-offset-3  " style=" ">
+                <div class="col-md-offset-1">
+                    <h2>名称：{{x.name}}<br></h2>
+                    <i class="glyphicon glyphicon-time"></i> 时间：{{x.msgAttrs.start_time*1000|date:'yyyy/MM/dd'}}<br>
+                    <i class="glyphicon glyphicon-map-marker"></i> 地点：{{x.msgAttrs.province}}(省/直辖市){{x.msgAttrs.city}}{{x.msgAttrs.location}}<br>
+                    <i class="glyphicon glyphicon-record"></i> <img style="width:35px;height:35px;"
+                                                                        ng-src="/api/upload/images/{{publishUser.photoId}}"> <font color="blue">{{publishUser.extattrs.realName}}</font><br>
+                    <button
+                            class="btn btn-primary col-md-offset-10  "
+                            style="margin-bottom: 1%;"
+                            ng-click="activityManage(x)">管理</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

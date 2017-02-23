@@ -1,13 +1,23 @@
 .weui-uploader__bd
     ul.weui-uploader__files(style='margin:9px 9px 0 0')
         li.weui-uploader__file(ng-repeat='k in items  track by $index'
-        ng-style='k.style')
-    .weui-uploader__input-box {{items.length}}
+        ng-style='k.style'
+        ng-click='showGallery(k.style,$index)'
+        ng-class='k.complete?"":"weui-uploader__file_status"')
+            .weui-uploader__file-content {{k.percent}}
+                i.weui-icon-warn(ng-show='k.warn')
+    .weui-uploader__input-box
         input.weui-uploader__input(
             type='file'
             ngf-select
             ng-model='picFile'
             name='file'
-            accept="image/*"
+            ngf-accept="'image/*'"
             ngf-max-size='3MB'
-            ngf-model-invalid="errorFile")
+            ngf-model-invalid=" errorFile")
+.weui-gallery(style='display:block' ng-show='gallery')
+    span.weui-gallery__img(ng-style="galleryStyle"
+    ng-click="hideGallery()")
+    .weui-gallery__opr
+        a.weui-gallery__del(ng-click='deleteImage()')
+            i.weui-icon-delete.weui-icon_gallery-delete

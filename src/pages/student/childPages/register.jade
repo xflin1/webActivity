@@ -5,6 +5,7 @@ div(ng-controller='register')
             i.icon.fa.fa-plus-circle.fa-inverse
         div(ui-drop-menu='menus')
         h1.title 活动详情
+    div(ui-carousel='image')
     .weui-panel__hd
         h1.h1 {{content.name}}
         a(href="javascript:;" class='{{registerStatus?"ui-star":""}}' ng-click='toggleSign()')
@@ -32,8 +33,6 @@ div(ng-controller='register')
             .ui-page.page__bd
                 article
                     section
-                        p
-                            img(src='http://photo.enterdesk.com/2010-10-24/enterdesk.com-3B11711A460036C51C19F87E7064FE9D.jpg')
                         p.p {{content.content}}
                 a.weui-btn.weui-btn_primary(href='javascript:;' ng-click='sign()' ng-hide='registerStatus') 报名
                 a.weui-btn.weui-btn_warn(href='javascript:;' ng-click='unSign()' ng-show='registerStatus') 取消报名

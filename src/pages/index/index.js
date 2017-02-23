@@ -2,10 +2,12 @@ var angular = require('angular');
 require('angular-route');
 var servAction = require('./controller/serviceActionController.js');
 var servType = require('./controller/serviceTypeController.js');
+var common=require('./controller/controller.js');
 var magic = require('../../../util/magic.js');
 var App = angular.module('myApp',["ngRoute"]);
 servAction(App);
 servType(App);
+common(App);
 App.config(['$routeProvider',function ($routeProvider) {
     $routeProvider.when('/',{
         templateUrl:'/index/list'
@@ -92,6 +94,15 @@ App.config(['$routeProvider',function ($routeProvider) {
     }).when(magic.NG_TYPE_UPDATE_FAIL,{
         templateUrl:magic.URL_TYPE_UPDATE_FAIL,
         controller:'serviceTypeUpdateFail'
+    }).when(magic.NG_STUDENT_INFO,{
+        templateUrl:magic.URL_ADMINUSER,
+        controller:'userInfo'
+    }).when(magic.NG_USER_TYPE,{
+        templateUrl:magic.URL_USER_INFO,
+        controller:'userInfoUpdate'
+    }).when(magic.NG_USER_PASSWORD,{
+        templateUrl:magic.URL_USER_PASSWORD,
+        controller:'password'
     }).otherwise({
         redirectTo:'/'
     });

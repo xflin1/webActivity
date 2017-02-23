@@ -1,14 +1,48 @@
-form(name='form' ng-controller='registerAdd')
-    div.weui-cells__title 人数限制
-    div.weui-cells.weui-cells_form
-        .weui-cell(ng-class="{true:'weui-cell_warn',false:''}[form.description.$error.required]")
+form(name='form' ng-controller='registerAdd' style='padding:0 15px')
+    .weui-cells__title 标题
+    .weui-cells.weui-cells_form
+        div.weui-cell
+            div.weui-cell__bd
+                input.weui-input(
+                name='name',
+                ng-model='service.name',
+                ng-model-options="{ updateOn: 'blur' }",
+                placeholder="报名贴标题",
+                required)
+            div.weui-cell__ft(ng-show='form.name.$error.required')
+                i.weui-icon-warn
+    .weui-cells__title 图片上传(上传相关图片,该图片为公开状态)
+    .weui-cells.weui-cells_form
+        .weui-cell
+            .weui-cell__bd(ui-uploader='service')
+    .weui-cells__title 描述
+    .weui-cells.weui-cells_form
+        .weui-cell
             .weui-cell__bd
                 textarea.weui-textarea(
                 name='description',
-                ng-model='Register.limit',
-                placeholder="人数限制",
+                ng-model='service.description',
+                placeholder="活动描述",
                 required,
                 rows=3)
-    div.weui-btn-area
-        button.weui-btn.weui-btn_primary.ui-btn(ng-disabled="form.$invalid",ng-click='next()') 下一步
+    .weui-cells__title 内容
+    .weui-cells.weui-cells_form
+        .weui-cell
+            .weui-cell__bd
+                textarea.weui-textarea(
+                name='content',
+                ng-model='service.content',
+                placeholder="活动详情",
+                rows=6,
+                required)
+    .weui-cells__title 发布目标
+    .weui-cells.weui-cells_form
+        .weui-cell
+            .weui-cell__bd
+                .target-input
+                    i.target-input-button.fa.fa-plus-square-o(ng-click='showTarget()')
+                    .target-input-block(ng-repeat='key in select track by $index' ng-click='deleteTarget($index)') {{getName(key)}}
+        button.weui-btn.weui-btn_primary.ui-btn(ng-disabled="form.$invalid",ng-click='submit()') 发布
+    .ui-target-container
+        #uiTarget.ui-target-wrap.ui-target-show(ui-target='list' target-select='select' style='padding-bottom: 2.2rem;')
 

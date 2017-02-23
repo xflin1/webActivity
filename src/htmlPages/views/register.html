@@ -1,0 +1,127 @@
+<div ui-content-for="title">
+
+</div>
+<img src="./images/bg0.png" style="z-index: -1;width:100%">
+<div style="width: 40%;background-color: whitesmoke;position:absolute;left:30%;top:30%;">
+
+        <div class="form-group margin_login">
+            <label class="col-md-4 control-label green">注册账号</label>
+            <label class="right_down"><a href="./#/login">登录</a></label>
+        </div>
+        <hr>
+        <div>
+            <input type="radio"
+                   name="radio"
+                   class="rd_person"
+                   checked
+                   ng-click="checkPerson()"
+                   id="rd_person">
+            <label for="rd_person" class="rd_person">个人</label>
+            <input type="radio"
+                   name="radio"
+                   ng-click="checkCompany()"
+                   class="rd_company"
+                   id="rd_company">
+            <label for="rd_company" class="rd_company">企业</label>
+        </div>
+        <form name="userRegisterForm" class="form-horizontal" ng-show=isPerson>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label" for="name">用户名</label>
+                <div class="col-md-5 controls  ">
+                    <input type="text" id="name" name="name" ng-model="user.userName" >
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label" for="user_nickname">昵称</label>
+                <div class="col-md-5 controls">
+                    <input type="text" id="user_nickname" name="nickname" ng-model="user.nickname" >
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label " for="user_password">密码</label>
+                <div class="col-md-5 controls">
+                    <input type="password" id="user_password" name="password" ng-model="user.password">
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label " for="user_password2">确认密码</label>
+                <div class="col-md-5 controls">
+                    <input type="password" id="user_password2" name="password2" ng-model="user.password2">
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin" style="position:relative;left: 25%;">
+                <input type="checkbox"
+                       id="pcb_agree"
+                       ng-model="cb_checked">
+                <label>我已阅读并同意《创新平台使用协议》</label>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 margin">
+                    <button class="btn btn-primary btn-block"
+                            ng-click="register_p(user)"
+                            ng-disabled="(!cb_checked) || (!userRegisterForm.name.$dirty)
+                            || (!userRegisterForm.password.$dirty) || (!userRegisterForm.password2.$dirty)
+                            || (user.password!=user.password2)">注册</button>
+                </div>
+            </div>
+        </form>
+
+        <form name="vendorRegisterForm" class="form-horizontal" ng-hide=isPerson>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label" for="v_name">企业名称</label>
+                <div class="col-md-5 controls">
+                    <input type="text" id="v_name" name="name" ng-model="vendor.name" >
+                </div>
+                <span class="required">*</span>
+            </div>
+            <!--<div class="form-group margin">-->
+                <!--<label class="col-md-4 control-label" for="weid">微信号</label>-->
+                <!--<div class="col-md-5 controls">-->
+                    <!--<input type="text" id="weid" name="weid" ng-model="vendor.weid" >-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-group margin">
+                <label class="col-md-4 control-label" for="account">用户名</label>
+                <div class="col-md-5 controls">
+                    <input type="text" id="account" name="account" ng-model="vendor.userName" >
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label " for="password">密码</label>
+                <div class="col-md-5 controls">
+                    <input type="password" id="password" name="password" ng-model="vendor.password">
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin">
+                <label class="col-md-4 control-label " for="password2">确认密码</label>
+                <div class="col-md-5 controls  ">
+                    <input type="password" id="password2" name="password2" ng-model="vendor.password2">
+                </div>
+                <span class="required">*</span>
+            </div>
+            <div class="form-group margin" style="position:relative;left: 25%;">
+                <input type="checkbox"
+                       id="ccb_agree"
+                       ng-model="cb_checked">
+                <label>我已阅读并同意《创新平台使用协议》</label>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 margin">
+                    <button class="btn btn-primary btn-block"
+                            ng-click="register_c(vendor)"
+                            ng-disabled="(!cb_checked) || (!vendorRegisterForm.name.$dirty)
+                            || (!vendorRegisterForm.account.$dirty) || (!vendorRegisterForm.password.$dirty)
+                            || (!vendorRegisterForm.password2.$dirty)
+                            || (vendor.password!=vendor.password2)">注册</button>
+                </div>
+            </div>
+        </form>
+
+
+</div>

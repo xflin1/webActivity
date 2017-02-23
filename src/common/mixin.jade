@@ -1,14 +1,22 @@
 //--------功能导航解析
 if menu
+    mixin a2blank(v)
+        if v.url=='/back'
+            a(href=v.url,target='_blank')
+                i.fa.pull-left.fa-lg(class='fa-' + v.icon)
+                    | #{v.name}
+         else
+             a(href=v.url)
+                 i.fa.pull-left.fa-lg(class='fa-' + v.icon)
+                     | #{v.name}
+
     mixin nav(nav)
         ul.dropdown-menu.dropdown-menu-right(aria-labelledby="dLabel")
             each val,index in nav
                 if index == menu
                     each v,k in val
                         li
-                            a(href=v.url)
-                                i.fa.pull-left.fa-lg(class='fa-'+v.icon)
-                                | #{v.name}
+                            +a2blank(v)
                         //-获取当前菜单名称
                         if currMenu
                             if k == currMenu
