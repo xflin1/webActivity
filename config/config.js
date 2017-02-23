@@ -14,7 +14,8 @@ module.exports={
         host: '127.0.0.1',
         user: 'root',
         password: 'cellcom',
-        database:'serviceRelease',
+        //database:'serviceRelease',
+        database:'service',
         port: 3306,
         limit: 10
     },
